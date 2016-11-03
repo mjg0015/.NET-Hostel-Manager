@@ -1,35 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Domain.Model;
+using Domain.Service;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using System.Windows.Controls;
+using System.Windows.Data;
+using DesktopClient.Commands;
+
 
 namespace DesktopClient.ViewModel
 {
-    public class LoginViewModel : INotifyPropertyChanged, IDataErrorInfo
+    public class LoginViewModel : INotifyPropertyChanged
     {
-        public string this[string columnName]
+        public LoginViewModel()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            User=new User();
+            Login= new LoginCommand(this);
         }
 
-        public string Error
+        public User User { get; }
+
+        private bool canExecuteLogin;
+        public bool CanExecuteLogin
         {
-            get
+            get { return canExecuteLogin; }
+            private set
             {
-                throw new NotImplementedException();
+                canExecuteLogin = value;
+                OnPropertyChanged();
             }
         }
+        public ICommand Login { get; private set; }
+
+        public void LoginAction()
+        {
+            
+            IAuthenticationService authService = new AuthenticationService();
+            User user = authService.DoLogin(User.Name, User.Password);
+            //if (user == null)
+            //{
+            //    BindingExpression bindingExpression =
+            //    BindingOperations.GetBindingExpression(tbUsername, TextBox.TextProperty);
+
+            //    BindingExpressionBase bindingExpressionBase =
+            //    BindingOperations.GetBindingExpressionBase(tbUsername, TextBox.TextProperty);
+
+            //    ValidationError validationError =
+            //        new ValidationError(new ExceptionValidationRule(), bindingExpression);
+
+            //    Validation.MarkInvalid(bindingExpressionBase, validationError);
+                //EventManager.OnFindDuplicatedFilesButtonPressed(this, folderPath);
+            //}
+        }
+
+        #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion
     }
 }

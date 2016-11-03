@@ -1,9 +1,9 @@
-﻿<Window x:Class="DesktopClient.MainWindow"
+﻿<Window x:Class="DesktopClient.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DesktopClient"
+        xmlns:local="clr-namespace:DesktopClient.View"
         mc:Ignorable="d"
         Title="Hostel Manager: Sign In" Height="270" Width="400"
         WindowStartupLocation="CenterScreen" >
@@ -73,7 +73,7 @@
                 TextWrapping="Wrap"
                 VerticalAlignment="Center"
                 Padding="5"
-                Text=""/>
+                Text="{Binding User.Name,UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label 
                 x:Name="lblPassword"
@@ -89,7 +89,8 @@
                 Margin="10,0,10,0"
                 Grid.Row="1"
                 Padding="5"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center"
+                PasswordChanged="OnPasswordChanged"/>
 
             <Label 
                 x:Name="lblError"
@@ -107,7 +108,8 @@
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
                 VerticalAlignment="Center"
-                Padding="5" Click="btnSignIn_Click"/>
+                Padding="5"
+                Command="{Binding Login}"/>
         </Grid>
     </Grid>
 </Window>
