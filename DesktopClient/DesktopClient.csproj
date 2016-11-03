@@ -85,22 +85,11 @@
     <Compile Include="View\BedroomEditorWindow.xaml.cs">
       <DependentUpon>BedroomEditorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BedroomListWindow.xaml.cs">
-      <DependentUpon>BedroomListWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\CheckInWindow.xaml.cs">
       <DependentUpon>CheckInWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Page Include="View\BedroomEditorWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\BedroomListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CheckOutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,9 +100,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="View\CheckOutWindow.xaml.cs">
-      <DependentUpon>CheckOutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
