@@ -17,13 +17,14 @@ namespace DesktopClient.ViewModel
     {
         public LoginViewModel()
         {
-            User=new User();
-            Login= new LoginCommand(this);                             
+            User = new User();
+            Login = new LoginCommand(this);
         }
 
         public User User { get; }
 
         private bool canExecuteLogin;
+
         public bool CanExecuteLogin
         {
             get { return canExecuteLogin; }
@@ -33,17 +34,18 @@ namespace DesktopClient.ViewModel
                 OnPropertyChanged();
             }
         }
+
         public ICommand Login { get; private set; }
 
         public void LoginAction()
         {
             //IAuthenticationService authService = new AuthenticationService();
             //User user = authService.DoLogin(User.Name, User.Password);
- 
+
             //if (user != null)
             //{
-                Managers.EventManager.OnUserLoggedIn(this,User.Name);
-           // }
+            Managers.EventManager.OnUserLoggedIn(this, User.Name);
+            // }
         }
 
         #region INotifyPropertyChanged Members
