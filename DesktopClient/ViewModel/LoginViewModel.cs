@@ -34,23 +34,8 @@ namespace DesktopClient.ViewModel
 
         public void LoginAction()
         {
-            
             IAuthenticationService authService = new AuthenticationService();
             User user = authService.DoLogin(User.Name, User.Password);
-            //if (user == null)
-            //{
-            //    BindingExpression bindingExpression =
-            //    BindingOperations.GetBindingExpression(tbUsername, TextBox.TextProperty);
-
-            //    BindingExpressionBase bindingExpressionBase =
-            //    BindingOperations.GetBindingExpressionBase(tbUsername, TextBox.TextProperty);
-
-            //    ValidationError validationError =
-            //        new ValidationError(new ExceptionValidationRule(), bindingExpression);
-
-            //    Validation.MarkInvalid(bindingExpressionBase, validationError);
-                //EventManager.OnFindDuplicatedFilesButtonPressed(this, folderPath);
-            //}
         }
 
         #region INotifyPropertyChanged Members

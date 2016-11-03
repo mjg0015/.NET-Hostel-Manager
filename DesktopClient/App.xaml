@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:DesktopClient"
              StartupUri="View/LoginWindow.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>
