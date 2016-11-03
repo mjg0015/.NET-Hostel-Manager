@@ -70,6 +70,9 @@
     </ApplicationDefinition>
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Data\UserRepository.cs" />
+    <Compile Include="EventArgsExtenctions\UserEventArgs.cs" />
+    <Compile Include="Managers\EventManager.cs" />
+    <Compile Include="Managers\ViewManager.cs" />
     <Compile Include="Model\BathroomType.cs" />
     <Compile Include="Model\Bedroom.cs" />
     <Compile Include="Model\BedType.cs" />
@@ -82,11 +85,12 @@
     <Compile Include="Service\CheckInService.cs" />
     <Compile Include="Service\GuestService.cs" />
     <Compile Include="Service\PersistenceService.cs" />
+    <Compile Include="ViewModel\CheckInManagementViewModel.cs" />
     <Compile Include="View\BedroomEditorWindow.xaml.cs">
       <DependentUpon>BedroomEditorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CheckInWindow.xaml.cs">
-      <DependentUpon>CheckInWindow.xaml</DependentUpon>
+    <Compile Include="View\CheckInManagementWindow.xaml.cs">
+      <DependentUpon>CheckInManagementWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Page Include="View\BedroomEditorWindow.xaml">
@@ -105,7 +109,7 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\CheckInWindow.xaml">
+    <Page Include="View\CheckInManagementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

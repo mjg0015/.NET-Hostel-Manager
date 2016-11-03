@@ -11,17 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DesktopClient.ViewModel;
 
-namespace DesktopClient
+namespace DesktopClient.View
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class CheckInManagementWindow : Window
     {
-        public Window1()
+        public CheckInManagementWindow()
         {
             InitializeComponent();
+            DataContext = new CheckInManagementViewModel();
         }
     }
 }

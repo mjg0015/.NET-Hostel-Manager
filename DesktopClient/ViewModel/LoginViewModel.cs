@@ -2,10 +2,13 @@
 using Domain.Service;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Data;
 using DesktopClient.Commands;
+using DesktopClient.EventArgsExtenctions;
+using DesktopClient.Managers;
 
 
 namespace DesktopClient.ViewModel
@@ -15,7 +18,7 @@ namespace DesktopClient.ViewModel
         public LoginViewModel()
         {
             User=new User();
-            Login= new LoginCommand(this);
+            Login= new LoginCommand(this);                             
         }
 
         public User User { get; }
@@ -34,8 +37,13 @@ namespace DesktopClient.ViewModel
 
         public void LoginAction()
         {
-            IAuthenticationService authService = new AuthenticationService();
-            User user = authService.DoLogin(User.Name, User.Password);
+            //IAuthenticationService authService = new AuthenticationService();
+            //User user = authService.DoLogin(User.Name, User.Password);
+ 
+            //if (user != null)
+            //{
+                Managers.EventManager.OnUserLoggedIn(this,User.Name);
+           // }
         }
 
         #region INotifyPropertyChanged Members
