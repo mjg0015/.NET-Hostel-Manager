@@ -1,4 +1,5 @@
-﻿using Domain.Model;
+﻿using Domain.Data;
+using Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,24 +21,34 @@ namespace Domain.Service
 
     public class AmenityService : IAmenityService
     {
+        private IRepository<BedType> _bedTypeRepo;
+
+        private IRepository<BathroomType> _bathroomTypeRepo;
+
+        public AmenityService()
+        {
+            _bedTypeRepo = new BedTypeRepository();
+            _bathroomTypeRepo = new BathroomTypeRepository();
+        }
+
         public bool CreateBathroomType(BathroomType bathroomType)
         {
-            throw new NotImplementedException();
+            return _bathroomTypeRepo.InsertOrUpdate(bathroomType);
         }
 
         public bool CreateBedType(BedType bedType)
         {
-            throw new NotImplementedException();
+            return _bedTypeRepo.InsertOrUpdate(bedType);
         }
 
         public List<BathroomType> GetAllBathroomTypes()
         {
-            throw new NotImplementedException();
+            return _bathroomTypeRepo.FindAll();
         }
 
         public List<BedType> GetAllBedTypes()
         {
-            throw new NotImplementedException();
+            return _bedTypeRepo.FindAll();
         }
     }
 }

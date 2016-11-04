@@ -7,35 +7,34 @@ using System.Linq;
 
 namespace Domain.Data
 {
-    public interface IBedroomRepository
+    public interface IBedroomRepository : IRepository<Bedroom>
     {
-        List<Bedroom> FindAll();
-
         List<Bedroom> FindAvailable();
+
+        bool Remove(Bedroom bedroom);
     }
 
-    public class BedroomRepository : IBedroomRepository
+    public class BedroomRepository : Repository<Bedroom>, IBedroomRepository
     {
-        private IMongoDatabase _db;
-        
-        public BedroomRepository()
-        {
-            _db = PersistenceService.GetDatabase();
-        }
 
-        public List<Bedroom> FindAll()
+        public BedroomRepository() : base("bedrooms")
         {
-            var collection = _db.GetCollection<Bedroom>("bedrooms");
-            List<Bedroom> bedrooms = collection.Find(_ => true).ToList();
-
-            return bedrooms;
         }
 
         public List<Bedroom> FindAvailable()
         {
-            var collection = _db.GetCollection<Bedroom>("bedrooms");
-            List<Bedroom> bedrooms = collection.Find(x => x.Available == true).ToList();
+            List<Bedroom> bedrooms = _collection.Find(x => x.Available == true).ToList();
             return bedrooms;
+        }
+
+        public bool Remove(Bedroom bedroom)
+        {
+            var deletedCount = _collection.DeleteOne(x => x.Number == bedroom.Number).DeletedCount;
+            if(deletedCount > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

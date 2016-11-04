@@ -6,30 +6,25 @@ using System.Linq;
 
 namespace Domain.Data
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
         User FindByName(string name);
     }
 
-    public class UserRepository : IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
-        private IMongoDatabase _db;
         
-        public UserRepository()
+        public UserRepository() : base("users")
         {
-            _db = PersistenceService.GetDatabase();
         }
 
         public User FindByName(string name)
         {
             User user = null;
-            try
+            var found = _collection.Find(x => x.Name == name);
+            if(found.Count() > 0)
             {
-                var collection = _db.GetCollection<User>("users");
-                user = collection.Find(x => x.Name == name).First();
-            }catch(Exception)
-            {
-
+                user = found.First();
             }
 
             return user;

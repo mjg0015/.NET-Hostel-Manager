@@ -10,10 +10,7 @@ namespace Domain.Model
 {
     public class User
     {
-        // MongoDB id
-        public ObjectId Id { get; set; }
-
-        [BsonElement("name")]
+        [BsonId]
         public string Name { get; set; }
 
         [BsonElement("password")]

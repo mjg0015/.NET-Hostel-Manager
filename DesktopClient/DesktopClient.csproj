@@ -70,7 +70,12 @@
     </ApplicationDefinition>
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\SaveCheckInCommand.cs" />
+    <Compile Include="Data\BedTypeRepository.cs" />
+    <Compile Include="Data\BathroomTypeRepository.cs" />
     <Compile Include="Data\BedroomRepository.cs" />
+    <Compile Include="Data\CheckInRepository.cs" />
+    <Compile Include="Data\GuestRepository.cs" />
+    <Compile Include="Data\Repository.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="EventArgsExtenctions\UserEventArgs.cs" />
     <Compile Include="Managers\EventManager.cs" />

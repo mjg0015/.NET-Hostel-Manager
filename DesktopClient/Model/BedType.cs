@@ -10,7 +10,7 @@ namespace Domain.Model
 {
     public class BedType
     {
-        [BsonElement("name")]
+        [BsonId]
         public string Name { get; set; }
     }
 }

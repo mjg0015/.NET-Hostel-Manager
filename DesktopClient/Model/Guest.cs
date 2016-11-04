@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,19 @@ namespace Domain.Model
 
     public class Guest
     {
-        public ObjectId Id { get; set; }
+        [BsonId]
+        public string DocumentId { get; set; }
 
-        public string DocumentID { get; set; }
-
+        [BsonElement("name")]
         public string Name { get; set; }
 
+        [BsonElement("surname")]
         public string Surname { get; set; }
 
+        [BsonElement("birthDate")]
         public DateTime BirthDate { get; set; }
 
+        [BsonElement("sex")]
         public Sex Sex { get; set; }
     }
 }

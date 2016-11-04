@@ -36,7 +36,7 @@ namespace Domain.Service
 
         public bool CreateOrUpdate(Bedroom bedroom)
         {
-            throw new NotImplementedException();
+            return _bedroomRepo.InsertOrUpdate(bedroom);
         }
 
         public List<Bedroom> GetAll()

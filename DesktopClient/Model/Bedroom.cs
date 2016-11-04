@@ -10,9 +10,7 @@ namespace Domain.Model
 {
     public class Bedroom
     {
-        public ObjectId Id { get; set; }
-
-        [BsonElement("number")]
+        [BsonId]
         public int Number { get; set; }
 
         [BsonElement("price")]
