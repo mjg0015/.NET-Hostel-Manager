@@ -3,11 +3,9 @@ using System.Configuration;
 
 namespace Domain.Service
 {
-    public class PersistenceService
+    public static class PersistenceService
     {
         private static IMongoClient _client;
-
-        private static IMongoDatabase _database;
 
         public static IMongoClient GetClient()
         {

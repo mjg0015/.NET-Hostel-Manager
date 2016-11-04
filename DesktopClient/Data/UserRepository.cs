@@ -25,7 +25,7 @@ namespace Domain.Data
             User user = null;
             try
             {
-                var collection = _db.GetCollection<User>("user");
+                var collection = _db.GetCollection<User>("users");
                 user = collection.Find(x => x.Name == name).First();
             }catch(Exception)
             {

@@ -1,4 +1,5 @@
-﻿using Domain.Model;
+﻿using Domain.Data;
+using Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace Domain.Service
     public interface IBedroomService
     {
         List<Bedroom> GetAll();
+
+        List<Bedroom> GetAvailable();
 
         List<Bedroom> GetFiltered(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available);
 
@@ -24,6 +27,13 @@ namespace Domain.Service
 
     public class BedroomService : IBedroomService
     {
+        private BedroomRepository _bedroomRepo;
+
+        public BedroomService()
+        {
+            _bedroomRepo = new BedroomRepository();
+        }
+
         public bool CreateOrUpdate(Bedroom bedroom)
         {
             throw new NotImplementedException();
@@ -31,7 +41,12 @@ namespace Domain.Service
 
         public List<Bedroom> GetAll()
         {
-            throw new NotImplementedException();
+            return _bedroomRepo.FindAll();
+        }
+
+        public List<Bedroom> GetAvailable()
+        {
+            return _bedroomRepo.FindAvailable();
         }
 
         public List<Bedroom> GetFiltered(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available)

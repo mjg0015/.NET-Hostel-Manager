@@ -39,13 +39,13 @@ namespace DesktopClient.ViewModel
 
         public void LoginAction()
         {
-            //IAuthenticationService authService = new AuthenticationService();
-            //User user = authService.DoLogin(User.Name, User.Password);
+            IAuthenticationService authService = new AuthenticationService();
+            User user = authService.DoLogin(User.Name, User.Password);
 
-            //if (user != null)
-            //{
-            Managers.EventManager.OnUserLoggedIn(this, User.Name);
-            // }
+            if (user != null)
+            {
+                Managers.EventManager.OnUserLoggedIn(this, User.Name);
+            }
         }
 
         #region INotifyPropertyChanged Members
