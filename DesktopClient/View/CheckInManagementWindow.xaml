@@ -80,9 +80,9 @@
                         <DataGridTextColumn Header="Number" Binding="{Binding Number}" Width="auto" />
                         <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="auto"/>
                         <DataGridTextColumn Header="Size" Binding="{Binding Size}" Width="auto"/>
-                        <DataGridTextColumn Header="Availiable" Binding="{Binding Availiable}" Width="auto"/>
+                        <DataGridTextColumn Header="Available" Binding="{Binding Available}" Width="auto"/>
                         <DataGridTextColumn Header="Bathroom type" Binding="{Binding BathroomType.Name}" Width="auto"/>
-                        <DataGridTextColumn Header="Bed type" Binding="{Binding Bedtype.Name}" Width="auto"/>
+                        <DataGridTextColumn Header="Bed type" Binding="{Binding BedType.Name}" Width="auto"/>
                         <DataGridTemplateColumn Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
