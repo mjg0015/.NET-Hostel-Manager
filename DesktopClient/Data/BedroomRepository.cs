@@ -1,11 +1,8 @@
-﻿using Domain.Model;
-using Domain.Service;
+﻿using System.Collections.Generic;
+using DesktopClient.Model;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Domain.Data
+namespace DesktopClient.Data
 {
     public interface IBedroomRepository : IRepository<Bedroom>
     {

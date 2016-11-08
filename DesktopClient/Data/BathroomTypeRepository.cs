@@ -1,11 +1,6 @@
-﻿using Domain.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DesktopClient.Model;
 
-namespace Domain.Data
+namespace DesktopClient.Data
 {
     public class BathroomTypeRepository : Repository<BathroomType>
     {

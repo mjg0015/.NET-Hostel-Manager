@@ -1,10 +1,7 @@
-﻿using Domain.Model;
-using Domain.Service;
+﻿using DesktopClient.Model;
 using MongoDB.Driver;
-using System;
-using System.Linq;
 
-namespace Domain.Data
+namespace DesktopClient.Data
 {
     public interface IUserRepository : IRepository<User>
     {

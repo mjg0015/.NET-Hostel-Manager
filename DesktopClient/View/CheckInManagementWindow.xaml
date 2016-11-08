@@ -75,14 +75,14 @@
             </TabItem>
 
             <TabItem Header="All bedrooms">
-                <DataGrid x:Name="BedroomsDataGrid" ItemsSource="{Binding ResultDictionary}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top">
+                <DataGrid x:Name="BedroomsDataGrid" ItemsSource="{Binding AllRoomsList,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Number" Binding="{Binding Key}" Width="auto"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Value}" Width="auto"/>
-                        <DataGridTextColumn Header="Size" Binding="{Binding Value}" Width="auto"/>
-                        <DataGridTextColumn Header="Availiable" Binding="{Binding Value}" Width="auto"/>
-                        <DataGridTextColumn Header="Bathroom type" Binding="{Binding Value}" Width="auto"/>
-                        <DataGridTextColumn Header="Bed type" Binding="{Binding Value}" Width="auto"/>
+                        <DataGridTextColumn Header="Number" Binding="{Binding Number}" Width="auto" />
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="auto"/>
+                        <DataGridTextColumn Header="Size" Binding="{Binding Size}" Width="auto"/>
+                        <DataGridTextColumn Header="Availiable" Binding="{Binding Availiable}" Width="auto"/>
+                        <DataGridTextColumn Header="Bathroom type" Binding="{Binding BathroomType.Name}" Width="auto"/>
+                        <DataGridTextColumn Header="Bed type" Binding="{Binding Bedtype.Name}" Width="auto"/>
                         <DataGridTemplateColumn Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -100,6 +100,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
+            
             <TabItem Header="Checkins List">
                 <DataGrid x:Name="ChekinsDataGrid" ItemsSource="{Binding ResultDictionary}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top">
                     <DataGrid.Columns>

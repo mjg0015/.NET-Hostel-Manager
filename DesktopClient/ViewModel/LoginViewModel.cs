@@ -1,14 +1,9 @@
-﻿using Domain.Model;
-using Domain.Service;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Controls;
-using System.Windows.Data;
 using DesktopClient.Commands;
-using DesktopClient.EventArgsExtenctions;
-using DesktopClient.Managers;
+using DesktopClient.Model;
+using DesktopClient.Service;
 
 
 namespace DesktopClient.ViewModel
@@ -45,6 +40,10 @@ namespace DesktopClient.ViewModel
             if (user != null)
             {
                 Managers.EventManager.OnUserLoggedIn(this, User.Name);
+            }
+            else
+            {
+
             }
         }
 

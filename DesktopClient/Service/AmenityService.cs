@@ -1,12 +1,8 @@
-﻿using Domain.Data;
-using Domain.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using DesktopClient.Data;
+using DesktopClient.Model;
 
-namespace Domain.Service
+namespace DesktopClient.Service
 {
     public interface IAmenityService
     {

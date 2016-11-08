@@ -1,7 +1,7 @@
-﻿using MongoDB.Driver;
-using System.Configuration;
+﻿using System.Configuration;
+using MongoDB.Driver;
 
-namespace Domain.Service
+namespace DesktopClient.Service
 {
     public static class PersistenceService
     {

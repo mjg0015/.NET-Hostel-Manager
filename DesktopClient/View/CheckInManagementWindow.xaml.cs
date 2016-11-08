@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DesktopClient.EventArgsExtenctions;
 using DesktopClient.ViewModel;
 
 namespace DesktopClient.View
@@ -20,10 +21,10 @@ namespace DesktopClient.View
     /// </summary>
     public partial class CheckInManagementWindow : Window
     {
-        public CheckInManagementWindow()
+        public CheckInManagementWindow(UserEventArgs eventArgs)
         {
             InitializeComponent();
-            DataContext = new CheckInManagementViewModel();
+            DataContext = new CheckInManagementViewModel(eventArgs);
         }
     }
 }

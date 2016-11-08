@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DesktopClient.EventArgsExtenctions;
+﻿using DesktopClient.EventArgsExtenctions;
 using DesktopClient.View;
-using Domain.Model;
 
 namespace DesktopClient.Managers
 {
@@ -22,7 +16,7 @@ namespace DesktopClient.Managers
 
         private void onUserLoggedIn(object source, UserEventArgs eventArgs)
         {
-            CheckInManagementWindow checkInManagementWindow = new CheckInManagementWindow();
+            CheckInManagementWindow checkInManagementWindow = new CheckInManagementWindow(eventArgs);
             checkInManagementWindow.Show();
             loginWindow.Close();
         }

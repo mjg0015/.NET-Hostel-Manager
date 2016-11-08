@@ -1,13 +1,8 @@
-﻿using Domain.Model;
-using Domain.Service;
+﻿using System.Collections.Generic;
+using DesktopClient.Model;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Domain.Data
+namespace DesktopClient.Data
 {
     public interface ICheckInRepository : IRepository<CheckIn>
     {

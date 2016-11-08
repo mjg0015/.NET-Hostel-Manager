@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using DesktopClient.Commands;
-using Domain.Model;
-using Domain.Service;
+using DesktopClient.EventArgsExtenctions;
+using DesktopClient.Model;
+using DesktopClient.Service;
 
 namespace DesktopClient.ViewModel
 {
@@ -17,18 +15,21 @@ namespace DesktopClient.ViewModel
         public Guest Guest { get; }
         public CheckIn CheckIn { get; }
         public List<Bedroom> AvailableRoomsList { get; }
+        public List<Bedroom> AllRoomsList { get; }
+        public List<CheckIn> AllCheckInList { get; }  
+        public string ManagerName { get; }
 
-
-        public CheckInManagementViewModel()
+        public CheckInManagementViewModel(UserEventArgs userEventArgs)
         {
             CheckIn= new CheckIn();
             Guest= new Guest();
             SaveCheckIn=new SaveCheckInCommand(this);
-
-            // Bedroom service usage example:
+            ManagerName = userEventArgs.UserName;
+            //Bedroom service usage example:
             IBedroomService bedroomServ = new BedroomService();
             AvailableRoomsList = bedroomServ.GetAvailable();
-
+            AllRoomsList = bedroomServ.GetAll();
+         
             canExecuteSaveCheckIn = true;
         }
         private bool canExecuteSaveCheckIn;
