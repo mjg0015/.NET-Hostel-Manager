@@ -33,10 +33,10 @@ namespace DesktopClient.ViewModel
 
         public ICommand Login { get; private set; }
 
-        public void LoginAction()
+        public async void LoginAction()
         {
             IAuthenticationService authService = new AuthenticationService();
-            User user = authService.DoLogin(User.Name, User.Password);
+            User user = await authService.DoLoginAsync(User.Name, User.Password);
 
             if (user != null)
             {
