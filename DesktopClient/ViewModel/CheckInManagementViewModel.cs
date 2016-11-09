@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -72,28 +73,28 @@ namespace DesktopClient.ViewModel
 
         public string ManagerName { get; }
 
-        private Bedroom currentBedroom ;
-        public Bedroom CurrentBedroom
+        private Bedroom currentAvailableBedroom ;
+        public Bedroom CurrentAvailableBedroom
         {
-            get { return currentBedroom; }
+            get { return currentAvailableBedroom; }
              set
             {
-                currentBedroom = value;
+                currentAvailableBedroom = value;
                 createListOfGuests();
                 OnPropertyChanged();
             }
         }
 
-        private Bedroom currentRoom;
-        public Bedroom CurrentRoom
+        private Bedroom currentBedRoom;
+        public Bedroom CurrentBedRoom
         {
             get
             {
-                return currentRoom;
+                return currentBedRoom;
             }
             set
             {
-                currentRoom = value;
+                currentBedRoom = value;
                 OnPropertyChanged();
             }
         }
@@ -103,15 +104,13 @@ namespace DesktopClient.ViewModel
 
         public CheckInManagementViewModel(UserEventArgs userEventArgs)
         {
-            SaveCheckIn=new SaveCheckInCommand(this);
-            //UpdateRoom = new UpdateRoomCommand(this);
-            //DeleteRoom = new DeleteRoomCommand(this);
+            SaveCheckIn = new SaveCheckInCommand(this);
+            UpdateRoom = new UpdateRoomCommand(this);
+            DeleteRoom = new DeleteRoomCommand(this);
             ManagerName = userEventArgs.UserName;
             initializeProperties();
             canExecuteSaveCheckIn = true;
         }
-
-       
 
         private async void initializeProperties()
         {
@@ -128,7 +127,7 @@ namespace DesktopClient.ViewModel
         private void createListOfGuests()
         {
             GuestList = new List<Guest>();
-            for (int i = 1; i <= currentBedroom.Size; i++)
+            for (int i = 1; i <= currentAvailableBedroom.Size; i++)
             {
                 GuestList.Add(new Guest());
             }
@@ -176,12 +175,16 @@ namespace DesktopClient.ViewModel
 
         public void UpdateRoomAction()
         {
+            //
             
-            var a = 0;
         }
-        public void DeleteRoomAction() { }
 
-        public async void SaveCheckInAction()
+        public void DeleteRoomAction()
+        {
+            //
+        }
+
+        public  void SaveCheckInAction()
         {
             //CheckIn.Bedroom = CurrentBedroom;
             //if (IsCheckInOk)
