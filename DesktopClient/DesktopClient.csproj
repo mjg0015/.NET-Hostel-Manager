@@ -75,6 +75,7 @@
     <Compile Include="Data\BedroomRepository.cs" />
     <Compile Include="Data\CheckInRepository.cs" />
     <Compile Include="Data\GuestRepository.cs" />
+    <Compile Include="Data\PersistenceFactory.cs" />
     <Compile Include="Data\Repository.cs" />
     <Compile Include="Data\UserRepository.cs" />
     <Compile Include="EventArgsExtenctions\UserEventArgs.cs" />
@@ -91,7 +92,6 @@
     <Compile Include="Service\BedroomService.cs" />
     <Compile Include="Service\CheckInService.cs" />
     <Compile Include="Service\GuestService.cs" />
-    <Compile Include="Service\PersistenceService.cs" />
     <Compile Include="ViewModel\CheckInManagementViewModel.cs" />
     <Compile Include="View\BedroomEditorWindow.xaml.cs">
       <DependentUpon>BedroomEditorWindow.xaml</DependentUpon>

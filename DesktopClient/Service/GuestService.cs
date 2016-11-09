@@ -1,25 +1,48 @@
 ﻿using System;
 using DesktopClient.Model;
+using DesktopClient.Data;
+using System.Threading.Tasks;
 
 namespace DesktopClient.Service
 {
     public interface IGuestService
     {
-        Guest FindGuestById(string id);
+        Task<Guest> FindGuestByIdAsync(string id);
 
-        bool CreateOrUpdate(Guest guest);
+        Task<bool> CreateOrUpdateAsync(Guest guest);
     }
 
     public class GuestService : IGuestService
     {
-        public bool CreateOrUpdate(Guest guest)
+        private IGuestRepository _guestRepo;
+
+        public GuestService()
         {
-            throw new NotImplementedException();
+            _guestRepo = new GuestRepository();
         }
 
-        public Guest FindGuestById(string id)
+        public async Task<bool> CreateOrUpdateAsync(Guest guest)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _guestRepo.InsertOrUpdateAsync(guest);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<Guest> FindGuestByIdAsync(string id)
+        {
+            try
+            {
+                return await _guestRepo.FindByIdAsync(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

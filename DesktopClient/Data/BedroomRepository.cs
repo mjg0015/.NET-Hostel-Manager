@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using DesktopClient.Model;
 using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace DesktopClient.Data
 {
     public interface IBedroomRepository : IRepository<Bedroom>
     {
-        List<Bedroom> FindAvailable();
+        Task<List<Bedroom>> FindAvailableAsync();
 
-        bool Remove(Bedroom bedroom);
+        Task<bool> RemoveAsync(Bedroom bedroom);
     }
 
     public class BedroomRepository : Repository<Bedroom>, IBedroomRepository
@@ -18,20 +19,16 @@ namespace DesktopClient.Data
         {
         }
 
-        public List<Bedroom> FindAvailable()
+        public async Task<List<Bedroom>> FindAvailableAsync()
         {
-            List<Bedroom> bedrooms = _collection.Find(x => x.Available == true).ToList();
+            List<Bedroom> bedrooms = await _collection.Find(x => x.Available == true).ToListAsync();
             return bedrooms;
         }
 
-        public bool Remove(Bedroom bedroom)
+        public async Task<bool> RemoveAsync(Bedroom bedroom)
         {
-            var deletedCount = _collection.DeleteOne(x => x.Number == bedroom.Number).DeletedCount;
-            if(deletedCount > 0)
-            {
-                return true;
-            }
-            return false;
+            var result = await _collection.DeleteOneAsync(x => x.Number == bedroom.Number);
+            return result.DeletedCount > 0;
         }
     }
 }

@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
 using DesktopClient.Data;
 using DesktopClient.Model;
+using System;
+using System.Threading.Tasks;
 
 namespace DesktopClient.Service
 {
     public interface IAmenityService
     {
-        List<BedType> GetAllBedTypes();
+        Task<List<BedType>> GetAllBedTypesAsync();
 
-        List<BathroomType> GetAllBathroomTypes();
+        Task<List<BathroomType>> GetAllBathroomTypesAsync();
 
-        bool CreateBedType(BedType bedType);
+        Task<bool> CreateBedTypeAsync(BedType bedType);
 
-        bool CreateBathroomType(BathroomType bathroomType);
+        Task<bool> CreateBathroomTypeAsync(BathroomType bathroomType);
     }
 
     public class AmenityService : IAmenityService
@@ -27,24 +29,52 @@ namespace DesktopClient.Service
             _bathroomTypeRepo = new BathroomTypeRepository();
         }
 
-        public bool CreateBathroomType(BathroomType bathroomType)
+        public async Task<bool> CreateBathroomTypeAsync(BathroomType bathroomType)
         {
-            return _bathroomTypeRepo.InsertOrUpdate(bathroomType);
+            try
+            {
+                return await _bathroomTypeRepo.InsertOrUpdateAsync(bathroomType);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public bool CreateBedType(BedType bedType)
+        public async Task<bool> CreateBedTypeAsync(BedType bedType)
         {
-            return _bedTypeRepo.InsertOrUpdate(bedType);
+            try
+            {
+                return await _bedTypeRepo.InsertOrUpdateAsync(bedType);
+            }
+            catch (Exception)
+            {
+                return false;
+            }      
         }
 
-        public List<BathroomType> GetAllBathroomTypes()
+        public async Task<List<BathroomType>> GetAllBathroomTypesAsync()
         {
-            return _bathroomTypeRepo.FindAll();
+            try
+            {
+                return await _bathroomTypeRepo.FindAllAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }        
         }
 
-        public List<BedType> GetAllBedTypes()
+        public async Task<List<BedType>> GetAllBedTypesAsync()
         {
-            return _bedTypeRepo.FindAll();
+            try
+            {
+                return await _bedTypeRepo.FindAllAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            } 
         }
     }
 }

@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using DesktopClient.Service;
 using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace DesktopClient.Data
 {
     public interface IRepository<E>
     {
-        List<E> FindAll();
+        Task<List<E>> FindAllAsync();
 
-        bool InsertOrUpdate(E entity);
+        Task<bool> InsertOrUpdateAsync(E entity);
     }
 
     public abstract class Repository<E> : IRepository<E>
@@ -18,21 +19,21 @@ namespace DesktopClient.Data
 
         public Repository(string collectionName)
         {
-            var db = PersistenceService.GetDatabase();
+            var db = PersistenceFactory.GetDatabase();
             _collection = db.GetCollection<E>(collectionName);
         }
 
-        public List<E> FindAll()
+        public async Task<List<E>> FindAllAsync()
         {
-            List<E> entities = _collection.Find(_ => true).ToList();
+            List<E> entities = await _collection.Find(_ => true).ToListAsync();
             return entities;
         }
 
-        public bool InsertOrUpdate(E entity)
+        public async Task<bool> InsertOrUpdateAsync(E entity)
         {
             try
             {
-                _collection.InsertOne(entity);
+                await _collection.InsertOneAsync(entity);
                 return true;
             }
             catch (Exception)

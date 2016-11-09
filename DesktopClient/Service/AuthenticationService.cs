@@ -1,24 +1,39 @@
 ﻿using DesktopClient.Data;
 using DesktopClient.Model;
+using System;
+using System.Threading.Tasks;
 
 namespace DesktopClient.Service
 {
     public interface IAuthenticationService
     {
-        User DoLogin(string username, string password);
+        Task<User> DoLoginAsync(string username, string password);
     }
 
     public class AuthenticationService : IAuthenticationService
     {
-        public User DoLogin(string username, string password)
+        private IUserRepository _userRepo;
+
+        public AuthenticationService()
         {
-            UserRepository userRepo = new UserRepository();
-            User user = userRepo.FindByName(username);
-            if(password == user.Password)
+            _userRepo = new UserRepository();
+        }
+
+        public async Task<User> DoLoginAsync(string username, string password)
+        {
+            try
             {
-                return user;
+                User user = await _userRepo.FindByNameAsync(username);
+                if (password == user.Password)
+                {
+                    return user;
+                }
+                return null;
             }
-            return null;
+            catch (Exception)
+            {
+                return null;
+            }            
         }
     }
 }

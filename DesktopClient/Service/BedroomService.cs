@@ -2,53 +2,55 @@
 using System.Collections.Generic;
 using DesktopClient.Data;
 using DesktopClient.Model;
+using System.Threading.Tasks;
 
 namespace DesktopClient.Service
 {
     public interface IBedroomService
     {
-        List<Bedroom> GetAll();
+        Task<List<Bedroom>> GetAllAsync();
 
-        List<Bedroom> GetAvailable();
+        Task<List<Bedroom>> GetAvailableAsync();
 
-        List<Bedroom> GetFiltered(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available);
+        Task<List<Bedroom>> GetFilteredAsync(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available);
 
-        /// <summary>
-        /// If bedroom exists, it will be updated with new configuration.
-        /// Otherwise it will be created.
-        /// </summary>
-        /// <param name="bedroom">The bedroom</param>
-        /// <returns></returns>
-        bool CreateOrUpdate(Bedroom bedroom);
+        Task<bool> CreateOrUpdateAsync(Bedroom bedroom);
+
+        Task<bool> RemoveAsync(Bedroom bedroom);
     }
 
     public class BedroomService : IBedroomService
     {
-        private BedroomRepository _bedroomRepo;
+        private IBedroomRepository _bedroomRepo;
 
         public BedroomService()
         {
             _bedroomRepo = new BedroomRepository();
         }
 
-        public bool CreateOrUpdate(Bedroom bedroom)
+        public async Task<bool> CreateOrUpdateAsync(Bedroom bedroom)
         {
-            return _bedroomRepo.InsertOrUpdate(bedroom);
+            return await _bedroomRepo.InsertOrUpdateAsync(bedroom);
         }
 
-        public List<Bedroom> GetAll()
+        public async Task<List<Bedroom>> GetAllAsync()
         {
-            return _bedroomRepo.FindAll();
+            return await _bedroomRepo.FindAllAsync();
         }
 
-        public List<Bedroom> GetAvailable()
+        public async Task<List<Bedroom>> GetAvailableAsync()
         {
-            return _bedroomRepo.FindAvailable();
+            return await _bedroomRepo.FindAvailableAsync();
         }
 
-        public List<Bedroom> GetFiltered(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available)
+        public async Task<List<Bedroom>> GetFilteredAsync(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> RemoveAsync(Bedroom bedroom)
+        {
+            return await _bedroomRepo.RemoveAsync(bedroom);
         }
     }
 }

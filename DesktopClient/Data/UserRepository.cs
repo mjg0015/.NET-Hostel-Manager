@@ -1,11 +1,12 @@
 ﻿using DesktopClient.Model;
 using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace DesktopClient.Data
 {
     public interface IUserRepository : IRepository<User>
     {
-        User FindByName(string name);
+        Task<User> FindByNameAsync(string name);
     }
 
     public class UserRepository : Repository<User>, IUserRepository
@@ -15,13 +16,13 @@ namespace DesktopClient.Data
         {
         }
 
-        public User FindByName(string name)
+        public async Task<User> FindByNameAsync(string name)
         {
             User user = null;
             var found = _collection.Find(x => x.Name == name);
             if(found.Count() > 0)
             {
-                user = found.First();
+                user = await found.FirstAsync();
             }
 
             return user;
