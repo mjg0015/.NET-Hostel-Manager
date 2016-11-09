@@ -68,8 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\DeleteRoomCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\SaveCheckInCommand.cs" />
+    <Compile Include="Commands\UpdateRoomCommand.cs" />
     <Compile Include="Data\BedTypeRepository.cs" />
     <Compile Include="Data\BathroomTypeRepository.cs" />
     <Compile Include="Data\BedroomRepository.cs" />
