@@ -25,7 +25,7 @@ namespace DesktopClient.Model
         override
         public string ToString()
         {
-            return "Bedroom nº: "+ Number + " (Size: " + Size + ")";
+            return "Bedroom № : "+ Number+" ;   Price : "+Price + " ;   Size : " + Size;
         }
     }
 }

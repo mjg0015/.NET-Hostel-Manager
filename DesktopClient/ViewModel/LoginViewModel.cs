@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using DesktopClient.Commands;
@@ -43,7 +44,7 @@ namespace DesktopClient.ViewModel
             }
             else
             {
-
+                throw new NotImplementedException();
             }
         }
 
