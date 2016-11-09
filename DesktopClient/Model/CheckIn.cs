@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 
 namespace DesktopClient.Model
 {
@@ -15,10 +16,16 @@ namespace DesktopClient.Model
         [BsonElement("departureDate")]
         public DateTime DepartureDate { get; set; }
 
-        [BsonElement("guests")]
+        [BsonIgnore]
         public List<Guest> Guests { get; set; }
 
-        [BsonElement("bedroom")]
+        [BsonElement("guests")]
+        public List<string> GuestsRef { get; set; }
+
+        [BsonIgnore]
         public Bedroom Bedroom { get; set; }
+
+        [BsonElement("bedroom")]
+        public int BedroomRef { get; set; }
     }
 }

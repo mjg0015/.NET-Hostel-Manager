@@ -1,12 +1,13 @@
 ﻿using System;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace DesktopClient.Model
 {
     public enum Sex
     {
-        MALE = 1,
-        FEMALE = 2
+        MALE,
+        FEMALE
     }
 
     public class Guest
@@ -24,6 +25,7 @@ namespace DesktopClient.Model
         public DateTime BirthDate { get; set; }
 
         [BsonElement("sex")]
+        [BsonRepresentation(BsonType.String)]
         public Sex Sex { get; set; }
     }
 }

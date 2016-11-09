@@ -2,11 +2,14 @@
 using DesktopClient.Model;
 using DesktopClient.Data;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace DesktopClient.Service
 {
     public interface ICheckInService
     {
+        Task<List<CheckIn>> GetPendingCheckOutAsync();
+
         Task<bool> CreateAsync(CheckIn checkIn);
 
         Task<bool> DoCheckOutAsync(CheckIn checkIn);
@@ -19,6 +22,18 @@ namespace DesktopClient.Service
         public CheckInService()
         {
             _checkInRepo = new CheckInRepository();
+        }
+
+        public async Task<List<CheckIn>> GetPendingCheckOutAsync()
+        {
+            try
+            {
+                return await _checkInRepo.FindWithPendingCheckOutAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }    
         }
 
         public async Task<bool> CreateAsync(CheckIn checkIn)

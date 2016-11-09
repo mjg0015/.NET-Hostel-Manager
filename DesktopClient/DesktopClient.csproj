@@ -75,6 +75,7 @@
     <Compile Include="Data\BedroomRepository.cs" />
     <Compile Include="Data\CheckInRepository.cs" />
     <Compile Include="Data\GuestRepository.cs" />
+    <Compile Include="Data\IAmenityRepository.cs" />
     <Compile Include="Data\PersistenceFactory.cs" />
     <Compile Include="Data\Repository.cs" />
     <Compile Include="Data\UserRepository.cs" />

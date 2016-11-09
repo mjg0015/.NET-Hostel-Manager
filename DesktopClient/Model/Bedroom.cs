@@ -16,11 +16,17 @@ namespace DesktopClient.Model
         [BsonElement("available")]
         public bool Available { get; set; }
 
-        [BsonElement("bathroomType")]
+        [BsonIgnore]
         public BathroomType BathroomType { get; set; }
 
-        [BsonElement("bedType")]
+        [BsonElement("bathroomType")]
+        public string BathroomTypeRef { get; set; }
+
+        [BsonIgnore]
         public BedType BedType { get; set; }
+
+        [BsonElement("bedType")]
+        public string BedTypeRef { get; set; }
 
         override
         public string ToString()
