@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using DesktopClient.ViewModel;
 
 
 namespace DesktopClient.View
@@ -10,6 +11,7 @@ namespace DesktopClient.View
     {
         public BedroomEditorWindow()
         {
+            DataContext = new BedroomEditorViewModel();
             InitializeComponent();
         }
     }

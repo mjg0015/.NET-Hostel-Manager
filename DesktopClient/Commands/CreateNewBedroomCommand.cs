@@ -1,14 +1,14 @@
-﻿using DesktopClient.ViewModel;
-using System;
+﻿using System;
 using System.Windows.Input;
+using DesktopClient.ViewModel;
 
 namespace DesktopClient.Commands
 {
-    class UpdateRoomCommand :ICommand
+    class CreateNewBedroomCommand:ICommand
     {
         private readonly CheckInManagementViewModel viewModel;
 
-        public UpdateRoomCommand(CheckInManagementViewModel viewModel)
+        public CreateNewBedroomCommand(CheckInManagementViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
@@ -20,7 +20,7 @@ namespace DesktopClient.Commands
 
         public void Execute(object parameter)
         {
-            viewModel.UpdateRoomAction();
+            viewModel.CreateNewBedroomAction();
         }
 
         public event EventHandler CanExecuteChanged;
