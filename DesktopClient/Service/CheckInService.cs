@@ -38,6 +38,7 @@ namespace DesktopClient.Service
 
         public async Task<bool> CreateAsync(CheckIn checkIn)
         {
+            checkIn.Bedroom.Available = false;
             try
             {
                 bool created = await _checkInRepo.InsertOrUpdateAsync(checkIn);

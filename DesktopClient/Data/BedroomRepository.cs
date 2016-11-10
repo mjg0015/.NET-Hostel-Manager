@@ -12,6 +12,8 @@ namespace DesktopClient.Data
 
         Task<List<Bedroom>> FindAvailableAsync();
 
+        Task<List<Bedroom>> FindUnavailableAsync();
+
         Task<bool> RemoveAsync(Bedroom bedroom);
     }
 
@@ -69,6 +71,12 @@ namespace DesktopClient.Data
         public async Task<List<Bedroom>> FindAvailableAsync()
         {
             List<Bedroom> bedrooms = await _collection.Find(x => x.Available == true).ToListAsync();
+            return await FillAmenitiesUtil(bedrooms);
+        }
+
+        public async Task<List<Bedroom>> FindUnavailableAsync()
+        {
+            List<Bedroom> bedrooms = await _collection.Find(x => x.Available == false).ToListAsync();
             return await FillAmenitiesUtil(bedrooms);
         }
 
