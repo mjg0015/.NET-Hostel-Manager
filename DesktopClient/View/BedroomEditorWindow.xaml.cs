@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using DesktopClient.EventArgsExtenctions;
+
 using DesktopClient.ViewModel;
 
 
@@ -12,6 +14,12 @@ namespace DesktopClient.View
         public BedroomEditorWindow()
         {
             DataContext = new BedroomEditorViewModel();
+            InitializeComponent();
+        }
+
+        public BedroomEditorWindow(BedroomEventArgs eventArgs)
+        {
+            DataContext = new BedroomEditorViewModel(eventArgs);
             InitializeComponent();
         }
     }
