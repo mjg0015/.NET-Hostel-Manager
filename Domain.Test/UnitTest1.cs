@@ -18,8 +18,8 @@ namespace Domain.Test
                 Price = 30.55,
                 Size = 2,
                 Available = true,
-                BathroomType = new BathroomType() { Name = "Shared" },
-                BedType = new BedType() { Name = "Double" }
+                BathroomType = new BathroomType("Shared"),
+                BedType = new BedType("Double"),
             };
 
             Bedroom bedroom2 = new Bedroom()
@@ -28,8 +28,8 @@ namespace Domain.Test
                 Price = 30.15,
                 Size = 3,
                 Available = true,
-                BathroomType = new BathroomType() { Name = "Private" },
-                BedType = new BedType() { Name = "Single" }
+                BathroomType = new BathroomType("Private"),
+                BedType = new BedType("Single")
             };
 
             Bedroom bedroom3 = new Bedroom()
@@ -38,8 +38,8 @@ namespace Domain.Test
                 Price = 10.12,
                 Size = 4,
                 Available = true,
-                BathroomType = new BathroomType() { Name = "Shared" },
-                BedType = new BedType() { Name = "Single" }
+                BathroomType = new BathroomType("Shared"),
+                BedType = new BedType("Single"),
             };
 
             Bedroom bedroom4 = new Bedroom()
@@ -48,8 +48,8 @@ namespace Domain.Test
                 Price = 12.12,
                 Size = 1,
                 Available = true,
-                BathroomType = new BathroomType() { Name = "Shared" },
-                BedType = new BedType() { Name = "Single" }
+                BathroomType = new BathroomType("Shared"),
+                BedType = new BedType("Single")
             };
 
             IBedroomService bedroomServ = new BedroomService();
@@ -61,6 +61,7 @@ namespace Domain.Test
 
             Assert.IsTrue(b1);
             Assert.IsTrue(b2);
+            Assert.IsTrue(b3);
             Assert.IsTrue(b3);
         }
 
@@ -110,8 +111,8 @@ namespace Domain.Test
                 Price = 30.55,
                 Size = 2,
                 Available = true,
-                BathroomType = new BathroomType() { Name = "Shared" },
-                BedType = new BedType() { Name = "Double" }
+                BathroomType = new BathroomType("Shared"),
+                BedType = new BedType("Double"),
             };
 
             Bedroom bedroom2 = new Bedroom()
@@ -120,8 +121,8 @@ namespace Domain.Test
                 Price = 30.15,
                 Size = 3,
                 Available = true,
-                BathroomType = new BathroomType() { Name = "Private" },
-                BedType = new BedType() { Name = "Single" }
+                BathroomType = new BathroomType("Private"),
+                BedType = new BedType("Single")
             };
 
             Bedroom bedroom3 = new Bedroom()
@@ -130,8 +131,8 @@ namespace Domain.Test
                 Price = 10.12,
                 Size = 4,
                 Available = true,
-                BathroomType = new BathroomType() { Name = "Shared" },
-                BedType = new BedType() { Name = "Single" }
+                BathroomType = new BathroomType("Shared"),
+                BedType = new BedType("Single"),
             };
 
             Bedroom bedroom4 = new Bedroom()
@@ -140,8 +141,8 @@ namespace Domain.Test
                 Price = 12.12,
                 Size = 1,
                 Available = true,
-                BathroomType = new BathroomType() { Name = "Shared" },
-                BedType = new BedType() { Name = "Single" }
+                BathroomType = new BathroomType("Shared"),
+                BedType = new BedType("Single")
             };
 
             List<Guest> guestList = new List<Guest>();
@@ -191,13 +192,29 @@ namespace Domain.Test
             bool c3 = await checkInService.CreateAsync(checkIn3);
             bool c4 = await checkInService.CreateAsync(checkIn4);
 
-            List<CheckIn> checkIns = await checkInService.GetPendingCheckOutAsync();
-            Assert.Equals(checkIns.Count, 4);
-
             Assert.IsTrue(c1);
             Assert.IsTrue(c2);
             Assert.IsTrue(c3);
             Assert.IsTrue(c4);
+        }
+
+        [TestMethod]
+        public async Task UpdateBedroom()
+        {
+            IBedroomService bedroomService = new BedroomService();
+            Bedroom bedroom1 = new Bedroom()
+            {
+                Number = 1,
+                Price = 30.56,
+                Size = 2,
+                Available = true,
+                BathroomType = new BathroomType("Shared"),
+                BedType = new BedType("Double"),
+            };
+
+            bool b1 = await bedroomService.CreateOrUpdateAsync(bedroom1);
+
+            Assert.IsTrue(b1);
         }
     }
 }

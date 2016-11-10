@@ -33,7 +33,7 @@ namespace DesktopClient.Service
         {
             try
             {
-                return await _bathroomTypeRepo.InsertOrUpdateAsync(bathroomType);
+                return await _bathroomTypeRepo.InsertAsync(bathroomType);
             }
             catch (Exception)
             {
@@ -45,7 +45,7 @@ namespace DesktopClient.Service
         {
             try
             {
-                return await _bedTypeRepo.InsertOrUpdateAsync(bedType);
+                return await _bedTypeRepo.InsertAsync(bedType);
             }
             catch (Exception)
             {

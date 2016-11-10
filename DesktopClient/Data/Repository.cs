@@ -10,7 +10,7 @@ namespace DesktopClient.Data
     {
         Task<List<E>> FindAllAsync();
 
-        Task<bool> InsertOrUpdateAsync(E entity);
+        Task<bool> InsertAsync(E entity);
     }
 
     public abstract class Repository<E> : IRepository<E>
@@ -29,7 +29,7 @@ namespace DesktopClient.Data
             return entities;
         }
 
-        public async Task<bool> InsertOrUpdateAsync(E entity)
+        public async Task<bool> InsertAsync(E entity)
         {
             try
             {

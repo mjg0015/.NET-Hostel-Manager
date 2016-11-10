@@ -10,9 +10,9 @@ namespace DesktopClient.Data
     {
         Task<Bedroom> FindByIdAsync(int id);
 
-        Task<List<Bedroom>> FindAvailableAsync();
+        Task<List<Bedroom>> FindByAvailabilityAsync(bool availability);
 
-        Task<List<Bedroom>> FindUnavailableAsync();
+        Task<bool> InsertOrUpdateAsync(Bedroom bedroom);
 
         Task<bool> RemoveAsync(Bedroom bedroom);
     }
@@ -30,24 +30,23 @@ namespace DesktopClient.Data
             _bedTypeRepo = new BedTypeRepository();
         }
 
-        public async new Task<bool> InsertOrUpdateAsync(Bedroom bedroom)
+        public async Task<bool> InsertOrUpdateAsync(Bedroom bedroom)
         {
-            bool bathroomTypeInserted = await _bathroomTypeRepo.InsertOrUpdateAsync(bedroom.BathroomType);
-            /*if (!bathroomTypeInserted)
-            {
-                return false;
-            }*/
-
-            bool bedTypeInserted = await _bedTypeRepo.InsertOrUpdateAsync(bedroom.BedType);
-            /*if (!bedTypeInserted)
-            {
-                return false;
-            }*/
+            await _bathroomTypeRepo.InsertAsync(bedroom.BathroomType);
+            await _bedTypeRepo.InsertAsync(bedroom.BedType);
 
             bedroom.BathroomTypeRef = bedroom.BathroomType.Name;
             bedroom.BedTypeRef = bedroom.BedType.Name;
 
-            return await base.InsertOrUpdateAsync(bedroom);
+            bool status = await base.InsertAsync(bedroom);
+            if (!status)
+            {
+                var filter = Builders<Bedroom>.Filter.Eq("Number", bedroom.Number);
+                var result = await _collection.ReplaceOneAsync(filter, bedroom);
+                status = result.ModifiedCount > 0;
+            }
+
+            return status;
         }
 
         public async new Task<List<Bedroom>> FindAllAsync()
@@ -68,15 +67,9 @@ namespace DesktopClient.Data
             return bedroom;
         }
 
-        public async Task<List<Bedroom>> FindAvailableAsync()
+        public async Task<List<Bedroom>> FindByAvailabilityAsync(bool availability)
         {
-            List<Bedroom> bedrooms = await _collection.Find(x => x.Available == true).ToListAsync();
-            return await FillAmenitiesUtil(bedrooms);
-        }
-
-        public async Task<List<Bedroom>> FindUnavailableAsync()
-        {
-            List<Bedroom> bedrooms = await _collection.Find(x => x.Available == false).ToListAsync();
+            List<Bedroom> bedrooms = await _collection.Find(x => x.Available == availability).ToListAsync();
             return await FillAmenitiesUtil(bedrooms);
         }
 

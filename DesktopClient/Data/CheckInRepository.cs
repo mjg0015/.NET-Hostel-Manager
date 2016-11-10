@@ -25,33 +25,33 @@ namespace DesktopClient.Data
             _bedroomRepo = new BedroomRepository();
         }
 
-        public async new Task<bool> InsertOrUpdateAsync(CheckIn checkIn)
+        public async new Task<bool> InsertAsync(CheckIn checkIn)
         {
             checkIn.GuestsRef = new List<string>();
 
             foreach (Guest guest in checkIn.Guests)
             {
                 bool guestInserted = await _guestRepo.InsertOrUpdateAsync(guest);
-                /*if (!guestInserted)
+                if (!guestInserted)
                 {
                     return false;
-                }*/
+                }
                 checkIn.GuestsRef.Add(guest.DocumentId);
             }
 
             checkIn.BedroomRef = checkIn.Bedroom.Number;
             bool bedroomUpdated = await _bedroomRepo.InsertOrUpdateAsync(checkIn.Bedroom);
-            /*if (!bedroomUpdated)
-                {
-                    return false;
-                }*/
+            if (!bedroomUpdated)
+            {
+                return false;
+            }
 
-            return await base.InsertOrUpdateAsync(checkIn);
+            return await base.InsertAsync(checkIn);
         }
 
         public async Task<List<CheckIn>> FindWithPendingCheckOutAsync()
         {
-            List<Bedroom> unavailableBedrooms = await _bedroomRepo.FindUnavailableAsync();
+            List<Bedroom> unavailableBedrooms = await _bedroomRepo.FindByAvailabilityAsync(false);
             List<int> unavailableBedroomsRefs = new List<int>();
 
             foreach(Bedroom unavailableBedroom in unavailableBedrooms)
@@ -64,6 +64,7 @@ namespace DesktopClient.Data
             foreach(CheckIn checkIn in checkIns)
             {
                 Bedroom bedroom = await _bedroomRepo.FindByIdAsync(checkIn.BedroomRef);
+                checkIn.Bedroom = bedroom;
 
                 List<Guest> guests = new List<Guest>();
                 foreach(string guestRef in checkIn.GuestsRef)

@@ -40,7 +40,7 @@ namespace DesktopClient.Service
 
         public async Task<List<Bedroom>> GetAvailableAsync()
         {
-            return await _bedroomRepo.FindAvailableAsync();
+            return await _bedroomRepo.FindByAvailabilityAsync(true);
         }
 
         public async Task<List<Bedroom>> GetFilteredAsync(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available)
