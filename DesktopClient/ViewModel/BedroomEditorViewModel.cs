@@ -28,6 +28,29 @@ namespace DesktopClient.ViewModel
             }
         }
 
+        private string newBedType;
+        public string NewBedType
+        {
+            get { return newBedType; }
+            set
+            {
+                newBedType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string newBathroomType;
+
+        public string NewBathroomType
+        {
+            get { return newBathroomType; }
+            set
+            {
+                newBathroomType = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand SaveBedroom { get; private set; }
 
         private bool canExecuteSaveBedroom;
@@ -50,6 +73,9 @@ namespace DesktopClient.ViewModel
 
         public void SaveBedroomAction()
         {
+            newBedroom.Available = true;
+            newBedroom.BathroomType = new BathroomType(newBathroomType);
+            newBedroom.BedType =new BedType( newBedType);
             Managers.EventManager.OnSaveNewBedroomButtonPressed(this, newBedroom);
         }
 

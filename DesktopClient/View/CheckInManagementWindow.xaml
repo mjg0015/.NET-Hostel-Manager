@@ -119,11 +119,12 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Arriving Date" Binding="{Binding ArrivingDate}" Width="auto"/>
                             <DataGridTextColumn Header="Departure Date" Binding="{Binding DepartureDate}" Width="auto"/>
-                            <DataGridTextColumn Header="List of Guests" Binding="{Binding Guest}" Width="auto"/>
+                            <DataGridTextColumn Header="Bedroom:" Binding="{Binding Bedroom}"/>
+                            <!--<DataGridTextColumn Header="List of Guests" Binding="{Binding Guest}" Width="auto"/>
                             <DataGridTextColumn Header="Size" Binding="{Binding Value}" Width="auto"/>
                             <DataGridTextColumn Header="Bathroom type" Binding="{Binding Value}" Width="auto"/>
                             <DataGridTextColumn Header="Bed type" Binding="{Binding Value}" Width="auto"/>
-                            <DataGridTextColumn Header="Guests" Binding="{Binding Value}" Width="auto"/>
+                            <DataGridTextColumn Header="Guests" Binding="{Binding Value}" Width="auto"/>-->
                         </DataGrid.Columns>
                     </DataGrid>
                     <Grid Name="ControlButtonGrid" Height="25" VerticalAlignment="Bottom">

@@ -118,12 +118,12 @@ namespace DesktopClient.ViewModel
             CheckIn = new CheckIn();
             CheckIn.ArrivingDate = DateTime.Today;
             CheckIn.DepartureDate = DateTime.Today.AddDays(1);
-            
             bedroomService = new BedroomService();
+            checkInService =new CheckInService();
             AvailableRoomsList = await bedroomService.GetAvailableAsync();
             AllRoomsList = await bedroomService.GetAllAsync();
-            
-         }
+            AllCheckInList = await checkInService.GetPendingCheckOutAsync();
+        }
 
         private void createListOfGuests()
         {

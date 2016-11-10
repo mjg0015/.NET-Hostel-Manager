@@ -27,5 +27,14 @@ namespace DesktopClient.Model
 
         [BsonElement("bedroom")]
         public int BedroomRef { get; set; }
+
+        public override string ToString()
+        {
+            if (Bedroom!=null)
+            {
+                return Bedroom.ToString();
+            }
+            return "-";
+        }
     }
 }
