@@ -1,14 +1,14 @@
-﻿using System;
+﻿using DesktopClient.ViewModel;
+using System;
 using System.Windows.Input;
-using DesktopClient.ViewModel;
 
 namespace DesktopClient.Commands
 {
-    class DeleteRoomCommand :ICommand
+    class UpdateBedroomCommand :ICommand
     {
         private readonly CheckInManagementViewModel viewModel;
 
-        public DeleteRoomCommand(CheckInManagementViewModel viewModel)
+        public UpdateBedroomCommand(CheckInManagementViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
@@ -20,7 +20,7 @@ namespace DesktopClient.Commands
 
         public void Execute(object parameter)
         {
-            viewModel.DeleteRoomAction();
+            viewModel.UpdateBedroomAction();
         }
 
         public event EventHandler CanExecuteChanged;

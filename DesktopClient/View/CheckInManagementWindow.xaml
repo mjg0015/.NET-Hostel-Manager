@@ -7,7 +7,7 @@
 
         mc:Ignorable="d"
         Title="Check In Form" Height="768" Width="1366">
- 
+
     <Grid>
         <TabControl>
             <TabItem Header="Check In">
@@ -85,6 +85,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
+
             <TabItem Header="All bedrooms">
                 <Grid>
                     <DataGrid x:Name="BedroomsDataGrid" ItemsSource="{Binding AllRoomsList,UpdateSourceTrigger=PropertyChanged}" CurrentCell="{Binding CurrentRoom,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top" >
@@ -102,42 +103,41 @@
                             <ColumnDefinition  />
                             <ColumnDefinition  />
                             <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <ComboBox Name="AllRoomsCB" Grid.Column="0" Grid.Row="2" SelectedItem="{ Binding CurrentBedRoom,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" ItemsSource="{Binding AllRoomsList,UpdateSourceTrigger=PropertyChanged}" />
-                        <Button  Grid.Column="1" Command="{Binding UpdateRoom}">Update</Button>
-                        <Button  Grid.Column="2" Command="{Binding DeleteRoom}">Delete</Button>
+                        <ComboBox Name="AllRoomsCB" Grid.Column="0" Grid.Row="0" SelectedItem="{ Binding CurrentBedroom,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" ItemsSource="{Binding AllRoomsList,UpdateSourceTrigger=PropertyChanged}" />
+                        <Button  Grid.Column="1" Command="{Binding UpdateBedroom}">Update</Button>
+                        <Button  Grid.Column="2" Command="{Binding DeleteBedroom}">Delete</Button>
+                        <Button  Grid.Column="3" Command="{Binding CreateNewBedroom}">Create new bedroom</Button>
                     </Grid>
-                    
                 </Grid>
-
             </TabItem>
 
             <TabItem Header="Checkins List">
-                <DataGrid x:Name="ChekinsDataGrid" ItemsSource="{Binding AllCheckInList}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Arriving Date" Binding="{Binding ArrivingDate}" Width="auto"/>
-                        <DataGridTextColumn Header="Departure Date" Binding="{Binding DepartureDate}" Width="auto"/>
-                        <DataGridTextColumn Header="List of Guests" Binding="{Binding Guest}" Width="auto"/>
-                        <DataGridTextColumn Header="Size" Binding="{Binding Value}" Width="auto"/>
-                        <DataGridTextColumn Header="Bathroom type" Binding="{Binding Value}" Width="auto"/>
-                        <DataGridTextColumn Header="Bed type" Binding="{Binding Value}" Width="auto"/>
-                        <DataGridTextColumn Header="Guests" Binding="{Binding Value}" Width="auto"/>
-                        <DataGridTemplateColumn Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button>Update</Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button>Delete</Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid>
+                    <DataGrid x:Name="ChekinsDataGrid" ItemsSource="{Binding AllCheckInList}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Arriving Date" Binding="{Binding ArrivingDate}" Width="auto"/>
+                            <DataGridTextColumn Header="Departure Date" Binding="{Binding DepartureDate}" Width="auto"/>
+                            <DataGridTextColumn Header="List of Guests" Binding="{Binding Guest}" Width="auto"/>
+                            <DataGridTextColumn Header="Size" Binding="{Binding Value}" Width="auto"/>
+                            <DataGridTextColumn Header="Bathroom type" Binding="{Binding Value}" Width="auto"/>
+                            <DataGridTextColumn Header="Bed type" Binding="{Binding Value}" Width="auto"/>
+                            <DataGridTextColumn Header="Guests" Binding="{Binding Value}" Width="auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Name="ControlButtonGrid" Height="25" VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition  />
+                                <ColumnDefinition  />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Name="AllCheckInCB" Grid.Column="0"  SelectedItem="{ Binding CurrentCheckIn,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" ItemsSource="{Binding AllCheckInList,UpdateSourceTrigger=PropertyChanged}" />
+                            <Button  Grid.Column="1" Command="{Binding Update}">Update</Button>
+                            <Button  Grid.Column="2" Command="{Binding Delete}">Delete</Button>
+                        </Grid>
+                    </Grid>
+                
             </TabItem>
 
         </TabControl>

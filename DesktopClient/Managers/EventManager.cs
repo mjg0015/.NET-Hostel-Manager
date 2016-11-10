@@ -1,4 +1,6 @@
-﻿using DesktopClient.EventArgsExtenctions;
+﻿using System;
+using DesktopClient.EventArgsExtenctions;
+using DesktopClient.Model;
 
 namespace DesktopClient.Managers
 {
@@ -22,5 +24,100 @@ namespace DesktopClient.Managers
         }
 
         #endregion
+
+        #region CreateNewBedroomButtonPressedEventHandler Members
+
+        public delegate void CreateNewBedroomButtonPressedEventHandler(object source, EventArgs eventArgs);
+
+        public static event CreateNewBedroomButtonPressedEventHandler CreateNewBedroomButtonPressed;
+
+        public static void OnCreateNewBedroomButtonPressed(object source, EventArgs eventArgs )
+        {
+          
+            if (CreateNewBedroomButtonPressed != null)
+            {
+                CreateNewBedroomButtonPressed(source, new EventArgs());
+            }
+        }
+
+        #endregion
+
+        #region SaveNewBedroomButtonPressedEventHandler Members
+
+        public static Bedroom Bedroom { get; private set; }
+
+        public delegate void SaveNewBedroomButtonPressedEventHandler(object source, BedroomEventArgs eventArgs);
+
+        public static event SaveNewBedroomButtonPressedEventHandler SaveNewBedroomButtonPressed;
+
+        public static void OnSaveNewBedroomButtonPressed(object source, Bedroom bedroom)
+        {
+            Bedroom = bedroom;
+            if (SaveNewBedroomButtonPressed != null)
+            {
+                SaveNewBedroomButtonPressed(source, new BedroomEventArgs(bedroom));
+            }
+        }
+
+        #endregion
+
+        #region UpdateBedroomButtonPressedEventHandler Members
+
+        public static Bedroom BedroomToUpdate { get; private set; }
+
+        public delegate void UpdateBedroomButtonPressedEventHandler(object source, BedroomEventArgs eventArgs);
+
+        public static event UpdateBedroomButtonPressedEventHandler UpdateBedroomButtonPressed;
+
+        public static void OnUpdateBedroomButtonPressed(object source, Bedroom bedroomToUpdate)
+        {
+            BedroomToUpdate = bedroomToUpdate;
+            if (UpdateBedroomButtonPressed != null)
+            {
+                UpdateBedroomButtonPressed(source, new BedroomEventArgs(bedroomToUpdate));
+            }
+        }
+
+        #endregion
+
+        #region UpdateBedroomButtonPressedEventHandler Members
+
+        public static Bedroom BedroomToDelete { get; private set; }
+
+        public delegate void DeleteBedroomButtonPressedEventHandler(object source, BedroomEventArgs eventArgs);
+
+        public static event DeleteBedroomButtonPressedEventHandler DeleteBedroomButtonPressed;
+
+        public static void OnDeleteBedroomButtonPressed(object source, Bedroom bedroomToDelete)
+        {
+            BedroomToDelete = BedroomToDelete;
+            if (DeleteBedroomButtonPressed != null)
+            {
+                DeleteBedroomButtonPressed(source, new BedroomEventArgs(bedroomToDelete));
+            }
+        }
+
+        #endregion
+
+        #region SaveCheckInButtonPressedEventHandler Members
+
+        public static CheckIn CheckIn { get; private set; }
+
+        public delegate void SaveCheckInButtonPressedEventHandler(object source, CheckInEventArgs eventArgs);
+
+        public static event SaveCheckInButtonPressedEventHandler SaveCheckInButtonPressed;
+
+        public static void OnSaveCheckInButtonPressed(object source, CheckIn checkIn)
+        {
+            CheckIn = checkIn;
+            if (SaveCheckInButtonPressed != null)
+            {
+                SaveCheckInButtonPressed(source, new CheckInEventArgs(checkIn));
+            }
+        }
+
+        #endregion
+
+
     }
 }

@@ -68,10 +68,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\DeleteRoomCommand.cs" />
+    <Compile Include="Commands\CreateNewBedroomCommand.cs" />
+    <Compile Include="Commands\DeleteBedroomCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="Commands\SaveBedroomCommand.cs" />
     <Compile Include="Commands\SaveCheckInCommand.cs" />
-    <Compile Include="Commands\UpdateRoomCommand.cs" />
+    <Compile Include="Commands\UpdateBedroomCommand.cs" />
     <Compile Include="Data\BedTypeRepository.cs" />
     <Compile Include="Data\BathroomTypeRepository.cs" />
     <Compile Include="Data\BedroomRepository.cs" />
@@ -81,6 +83,8 @@
     <Compile Include="Data\PersistenceFactory.cs" />
     <Compile Include="Data\Repository.cs" />
     <Compile Include="Data\UserRepository.cs" />
+    <Compile Include="EventArgsExtenctions\BedroomEventArgs.cs" />
+    <Compile Include="EventArgsExtenctions\CheckInEventArgs.cs" />
     <Compile Include="EventArgsExtenctions\UserEventArgs.cs" />
     <Compile Include="Managers\EventManager.cs" />
     <Compile Include="Managers\ViewManager.cs" />
@@ -95,6 +99,7 @@
     <Compile Include="Service\BedroomService.cs" />
     <Compile Include="Service\CheckInService.cs" />
     <Compile Include="Service\GuestService.cs" />
+    <Compile Include="ViewModel\BedroomEditorViewModel.cs" />
     <Compile Include="ViewModel\CheckInManagementViewModel.cs" />
     <Compile Include="View\BedroomEditorWindow.xaml.cs">
       <DependentUpon>BedroomEditorWindow.xaml</DependentUpon>

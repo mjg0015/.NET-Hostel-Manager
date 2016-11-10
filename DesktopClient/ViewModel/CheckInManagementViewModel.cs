@@ -85,16 +85,16 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        private Bedroom currentBedRoom;
-        public Bedroom CurrentBedRoom
+        private Bedroom currentBedroom;
+        public Bedroom CurrentBedroom
         {
             get
             {
-                return currentBedRoom;
+                return currentBedroom;
             }
             set
             {
-                currentBedRoom = value;
+                currentBedroom = value;
                 OnPropertyChanged();
             }
         }
@@ -105,8 +105,9 @@ namespace DesktopClient.ViewModel
         public CheckInManagementViewModel(UserEventArgs userEventArgs)
         {
             SaveCheckIn = new SaveCheckInCommand(this);
-            UpdateRoom = new UpdateRoomCommand(this);
-            DeleteRoom = new DeleteRoomCommand(this);
+            UpdateBedroom = new UpdateBedroomCommand(this);
+            DeleteBedroom = new DeleteBedroomCommand(this);
+            CreateNewBedroom = new CreateNewBedroomCommand(this);
             ManagerName = userEventArgs.UserName;
             initializeProperties();
             canExecuteSaveCheckIn = true;
@@ -146,54 +147,73 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        private bool canExecuteUpdateRoom;
-
-        public bool CanExecuteUpdateRoom
+        private bool canExecuteUpdateBedroom;
+        public bool CanExecuteUpdateBedroom
         {
-            get { return canExecuteUpdateRoom; }
+            get { return canExecuteUpdateBedroom; }
             private set
             {
-                canExecuteUpdateRoom = value;
+                canExecuteUpdateBedroom = value;
                 OnPropertyChanged();
             }
         }
-        private bool canExecuteDeleteRoom;
 
-        public bool CanExecuteDeleteRoom
+        private bool canExecuteDeleteBedroom;
+        public bool CanExecuteDelete
         {
-            get { return canExecuteDeleteRoom; }
+            get { return canExecuteDeleteBedroom; }
             private set
             {
-                canExecuteDeleteRoom = value;
+                canExecuteDeleteBedroom = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool canExecuteCreateNewBedroom;
+        public bool CanExecuteCanCreateNewBedroom
+        {
+            get { return canExecuteCreateNewBedroom; }
+            private set
+            {
+                canExecuteCreateNewBedroom = value;
                 OnPropertyChanged();
             }
         }
 
         public ICommand SaveCheckIn { get; private set; }
-        public ICommand UpdateRoom { get; private set; }
-        public ICommand DeleteRoom { get; private set; }
+        public ICommand UpdateBedroom { get; private set; }
+        public ICommand DeleteBedroom { get; private set; }
+        public ICommand CreateNewBedroom { get; private set; }
 
-        public void UpdateRoomAction()
+        public void UpdateBedroomAction()
         {
-            //
+           Managers.EventManager.OnUpdateBedroomButtonPressed(this,CurrentBedroom);
             
         }
 
-        public void DeleteRoomAction()
+        public void DeleteBedroomAction()
         {
-            //
+            Managers.EventManager.OnDeleteBedroomButtonPressed(this,CurrentBedroom);
         }
 
         public  void SaveCheckInAction()
         {
-            //CheckIn.Bedroom = CurrentBedroom;
-            //if (IsCheckInOk)
-            //{
-            //   ;
-            //    Managers.EventManager...
-            //    reload every Property.
-            //}
-            
+            CheckIn.Bedroom = currentAvailableBedroom;
+            if (IsCheckInOk(CheckIn))
+            {
+                Managers.EventManager.OnSaveCheckInButtonPressed(this,CheckIn);
+            }
+
+        }
+
+        private bool IsCheckInOk(CheckIn checkIn)
+        {
+            return true;//Need to be implement!
+        }
+
+        public void CreateNewBedroomAction()
+        {
+            Managers.EventManager.OnCreateNewBedroomButtonPressed(this,new EventArgs());
         }
         #region INotifyPropertyChanged Members
 
