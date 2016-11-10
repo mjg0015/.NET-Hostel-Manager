@@ -3,7 +3,7 @@ using DesktopClient.Model;
 
 namespace DesktopClient.EventArgsExtenctions
 {
-    class BedroomEventArgs:EventArgs
+    public class BedroomEventArgs:EventArgs
     {
         public Bedroom Bedroom { get; private set; }
 

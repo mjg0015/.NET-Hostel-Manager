@@ -35,7 +35,7 @@ namespace DesktopClient.Managers
 
         private async void onUpdateBedroomButtonPressed(object source, BedroomEventArgs eventArgs)
         {
-           await bedroomService.CreateOrUpdateAsync(eventArgs.Bedroom);
+            new BedroomEditorWindow(eventArgs).Show();
         }
 
         private async void onSaveCheckInButtonPressed(object source,CheckInEventArgs eventArgs)

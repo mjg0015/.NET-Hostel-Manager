@@ -66,7 +66,16 @@ namespace DesktopClient.ViewModel
 
         public BedroomEditorViewModel()
         {
-            NewBedroom=new Bedroom();
+            NewBedroom = new Bedroom();
+            SaveBedroom = new SaveBedroomCommand(this);
+            CanExecuteSaveBedroom = true;
+        }
+
+        public BedroomEditorViewModel(BedroomEventArgs eventArgs)
+        {
+            NewBedroom=eventArgs.Bedroom;
+            NewBedType = eventArgs.Bedroom.BedType.Name;
+            NewBathroomType = eventArgs.Bedroom.BathroomType.Name;
             SaveBedroom=new SaveBedroomCommand(this);
             CanExecuteSaveBedroom = true;
         }

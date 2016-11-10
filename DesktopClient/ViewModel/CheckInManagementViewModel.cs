@@ -111,7 +111,13 @@ namespace DesktopClient.ViewModel
             ManagerName = userEventArgs.UserName;
             initializeProperties();
             Managers.EventManager.SaveNewBedroomButtonPressed+= onSaveNewBedroomButtonPressed;
+            Managers.EventManager.DeleteBedroomButtonPressed+= onDeleteBedroomButtonPressed;
             canExecuteSaveCheckIn = true;
+        }
+
+        private void onDeleteBedroomButtonPressed(object source, EventArgs eventArgs)
+        {
+            reloadData();
         }
 
         private void onSaveNewBedroomButtonPressed(object source, EventArgs eventArgs)
@@ -119,7 +125,7 @@ namespace DesktopClient.ViewModel
            reloadData();
         }
 
-        private async void initializeProperties()
+        private void initializeProperties()
         {
             CheckIn = new CheckIn();
             CheckIn.ArrivingDate = DateTime.Today;
