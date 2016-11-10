@@ -19,6 +19,11 @@ namespace DesktopClient.Managers
             loginWindow.Show();
             checkInService = new CheckInService();
             bedroomService = new BedroomService();
+            subscribeEvents();
+        }
+
+        private void subscribeEvents()
+        {
             Managers.EventManager.UserLoggedIn += onUserLoggedIn;
             Managers.EventManager.SaveCheckInButtonPressed += onSaveCheckInButtonPressed;
             Managers.EventManager.SaveNewBedroomButtonPressed += onSaveNewBedroomButtonPressed;
@@ -38,7 +43,7 @@ namespace DesktopClient.Managers
             await bedroomService.RemoveAsync(eventArgs.Bedroom);
         }
 
-        private async void onUpdateBedroomButtonPressed(object source, BedroomEventArgs eventArgs)
+        private void onUpdateBedroomButtonPressed(object source, BedroomEventArgs eventArgs)
         {
             new BedroomEditorWindow(eventArgs).Show();
         }
