@@ -153,7 +153,8 @@ namespace Domain.Test
                 ArrivingDate = new DateTime(),
                 DepartureDate = new DateTime(),
                 Guests = guestList,
-                Bedroom = bedroom4
+                Bedroom = bedroom4,
+                Active = true
             };
 
             guestList.Add(guest2);
@@ -163,7 +164,8 @@ namespace Domain.Test
                 ArrivingDate = new DateTime(),
                 DepartureDate = new DateTime(),
                 Guests = guestList,
-                Bedroom = bedroom1
+                Bedroom = bedroom1,
+                Active = true
             };
 
             guestList.Add(guest3);
@@ -173,7 +175,8 @@ namespace Domain.Test
                 ArrivingDate = new DateTime(),
                 DepartureDate = new DateTime(),
                 Guests = guestList,
-                Bedroom = bedroom2
+                Bedroom = bedroom2,
+                Active = true
             };
 
             guestList.Add(guest4);
@@ -183,7 +186,8 @@ namespace Domain.Test
                 ArrivingDate = new DateTime(),
                 DepartureDate = new DateTime(),
                 Guests = guestList,
-                Bedroom = bedroom3
+                Bedroom = bedroom3,
+                Active = true
             };
 
             ICheckInService checkInService = new CheckInService();

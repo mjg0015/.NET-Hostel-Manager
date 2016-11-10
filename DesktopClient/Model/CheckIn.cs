@@ -28,6 +28,9 @@ namespace DesktopClient.Model
         [BsonElement("bedroom")]
         public int BedroomRef { get; set; }
 
+        [BsonElement("active")]
+        public bool Active { get; set; }
+
         public override string ToString()
         {
             if (Bedroom!=null)
