@@ -64,7 +64,7 @@ namespace DesktopClient.Data
                 bedroom = await found.FirstAsync();
             }
 
-            return bedroom;
+            return await FillAmenitiesUtil(bedroom);
         }
 
         public async Task<List<Bedroom>> FindByAvailabilityAsync(bool availability)
@@ -85,12 +85,17 @@ namespace DesktopClient.Data
 
             foreach (Bedroom bedroom in bedrooms)
             {
-                bedroom.BathroomType = await _bathroomTypeRepo.FindByTypeAsync(bedroom.BathroomTypeRef);
-                bedroom.BedType = await _bedTypeRepo.FindByTypeAsync(bedroom.BedTypeRef);
-                bedroomsFilled.Add(bedroom);
+                bedroomsFilled.Add(await FillAmenitiesUtil(bedroom));
             }
 
             return bedroomsFilled;
+        }
+
+        private async Task<Bedroom> FillAmenitiesUtil(Bedroom bedroom)
+        {
+            bedroom.BathroomType = await _bathroomTypeRepo.FindByTypeAsync(bedroom.BathroomTypeRef);
+            bedroom.BedType = await _bedTypeRepo.FindByTypeAsync(bedroom.BedTypeRef);
+            return bedroom;
         }
     }
 }

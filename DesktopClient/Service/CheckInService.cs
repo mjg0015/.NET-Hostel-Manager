@@ -19,9 +19,12 @@ namespace DesktopClient.Service
     {
         private ICheckInRepository _checkInRepo;
 
+        private IBedroomRepository _bedroomRepo;
+
         public CheckInService()
         {
             _checkInRepo = new CheckInRepository();
+            _bedroomRepo = new BedroomRepository();
         }
 
         public async Task<List<CheckIn>> GetPendingCheckOutAsync()
@@ -38,10 +41,11 @@ namespace DesktopClient.Service
 
         public async Task<bool> CreateAsync(CheckIn checkIn)
         {
+            checkIn.Active = true;
             checkIn.Bedroom.Available = false;
             try
             {
-                bool created = await _checkInRepo.InsertAsync(checkIn);
+                bool created = await _checkInRepo.InsertOrUpdateAsync(checkIn);
                 return created;
             }
             catch (Exception)

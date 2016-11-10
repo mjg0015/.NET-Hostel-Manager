@@ -170,12 +170,18 @@ namespace DesktopClient.ViewModel
 
         private void createListOfGuests()
         {
-            GuestList = new List<Guest>();
-            for (int i = 1; i <= currentAvailableBedroom.Size; i++)
+            if(currentAvailableBedroom != null)
             {
-                GuestList.Add(new Guest());
-            }
-            CheckIn.Guests = GuestList;
+                GuestList = new List<Guest>();
+                for (int i = 1; i <= currentAvailableBedroom.Size; i++)
+                {
+                    GuestList.Add(new Guest());
+                }
+                CheckIn.Guests = GuestList;
+            }else
+            {
+                GuestList = new List<Guest>();
+            }  
         }
 
         private bool canExecuteSaveCheckIn;
