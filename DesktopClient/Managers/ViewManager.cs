@@ -12,20 +12,25 @@ namespace DesktopClient.Managers
         private LoginWindow loginWindow;
         private CheckInService checkInService;
         private BedroomService bedroomService;
-        private CheckInManagementWindow checkInManagementWindow;
 
         public ViewManager(LoginWindow loginWindow)
         {
             this.loginWindow = loginWindow;
             loginWindow.Show();
-            checkInService= new CheckInService();
-            bedroomService= new BedroomService();
+            checkInService = new CheckInService();
+            bedroomService = new BedroomService();
             Managers.EventManager.UserLoggedIn += onUserLoggedIn;
             Managers.EventManager.SaveCheckInButtonPressed += onSaveCheckInButtonPressed;
-            Managers.EventManager.SaveNewBedroomButtonPressed+= onSaveNewBedroomButtonPressed;
-            Managers.EventManager.CreateNewBedroomButtonPressed += onCreateNewBedroomButtonPressed;  
+            Managers.EventManager.SaveNewBedroomButtonPressed += onSaveNewBedroomButtonPressed;
+            Managers.EventManager.CreateNewBedroomButtonPressed += onCreateNewBedroomButtonPressed;
             Managers.EventManager.DeleteBedroomButtonPressed += onDeleteBedroomButtonPressed;
             Managers.EventManager.UpdateBedroomButtonPressed += onUpdateBedroomButtonPressed;
+            Managers.EventManager.DeleteCheckInButtonPressed += onDeleteCheckInButtonPressed;
+        }
+
+        private async void onDeleteCheckInButtonPressed(object source, CheckInEventArgs eventArgs)
+        {
+            await checkInService.DoCheckOutAsync(eventArgs.CheckIn);
         }
 
         private async void onDeleteBedroomButtonPressed(object source, BedroomEventArgs eventArgs)
@@ -50,8 +55,6 @@ namespace DesktopClient.Managers
             {
                 window.Close();
             }
-            
-           // throw new NotImplementedException();
         }
 
         private void onCreateNewBedroomButtonPressed(object source,EventArgs eventArgs)
@@ -61,8 +64,7 @@ namespace DesktopClient.Managers
         
         private void onUserLoggedIn(object source, UserEventArgs eventArgs)
         {
-            checkInManagementWindow =new CheckInManagementWindow(eventArgs); 
-            checkInManagementWindow.Show();
+            new CheckInManagementWindow(eventArgs).Show();
             loginWindow.Close();
         }
     }

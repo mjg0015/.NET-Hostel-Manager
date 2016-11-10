@@ -102,17 +102,43 @@ namespace DesktopClient.ViewModel
         private IBedroomService bedroomService;
         private ICheckInService checkInService;
 
+        private CheckIn currentCheckIn;
+
+        public CheckIn CurrentCheckIn
+        {
+            get { return currentCheckIn; }
+            set
+            {
+                currentCheckIn = value;
+                OnPropertyChanged();
+            }
+        }
+
         public CheckInManagementViewModel(UserEventArgs userEventArgs)
         {
             SaveCheckIn = new SaveCheckInCommand(this);
             UpdateBedroom = new UpdateBedroomCommand(this);
             DeleteBedroom = new DeleteBedroomCommand(this);
             CreateNewBedroom = new CreateNewBedroomCommand(this);
+            UpdateCheckIn = new UpdateCheckInCommand(this);
+            DeleteCheckIn = new DeleteCheckInCommand(this);
             ManagerName = userEventArgs.UserName;
             initializeProperties();
             Managers.EventManager.SaveNewBedroomButtonPressed+= onSaveNewBedroomButtonPressed;
             Managers.EventManager.DeleteBedroomButtonPressed+= onDeleteBedroomButtonPressed;
+            Managers.EventManager.SaveCheckInButtonPressed+= onSaveCheckInButtonPressed;
+            Managers.EventManager.DeleteCheckInButtonPressed+= onDeleteCheckInButtonPressed;
             canExecuteSaveCheckIn = true;
+        }
+
+        private void onDeleteCheckInButtonPressed(object source, CheckInEventArgs eventArgs)
+        {
+            reloadData();
+        }
+
+        private void onSaveCheckInButtonPressed(object source, EventArgs eventArgs)
+        {
+            reloadData();
         }
 
         private void onDeleteBedroomButtonPressed(object source, EventArgs eventArgs)
@@ -187,7 +213,7 @@ namespace DesktopClient.ViewModel
         }
 
         private bool canExecuteCreateNewBedroom;
-        public bool CanExecuteCanCreateNewBedroom
+        public bool CanExecuteCreateNewBedroom
         {
             get { return canExecuteCreateNewBedroom; }
             private set
@@ -197,10 +223,34 @@ namespace DesktopClient.ViewModel
             }
         }
 
+        private bool canExecuteUpdateCheckIn;
+        public bool CanExecuteCanUpdateCheckIn
+        {
+            get { return canExecuteUpdateCheckIn; }
+            private set
+            {
+                canExecuteUpdateCheckIn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool canExecuteDeleteCheckIn;
+        public bool CanExecuteDeleteCheckIn
+        {
+            get { return canExecuteDeleteCheckIn; }
+            private set
+            {
+                canExecuteDeleteCheckIn = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand SaveCheckIn { get; private set; }
         public ICommand UpdateBedroom { get; private set; }
         public ICommand DeleteBedroom { get; private set; }
         public ICommand CreateNewBedroom { get; private set; }
+        public ICommand DeleteCheckIn { get; private set; }
+        public ICommand UpdateCheckIn { get; private set; }
 
         public void UpdateBedroomAction()
         {
@@ -220,18 +270,41 @@ namespace DesktopClient.ViewModel
             {
                 Managers.EventManager.OnSaveCheckInButtonPressed(this,CheckIn);
             }
-
         }
 
         private bool IsCheckInOk(CheckIn checkIn)
         {
-            return true;//Need to be implement!
+            bool answer = false;
+
+            if (CurrentAvailableBedroom != null)
+            foreach (var guest in GuestList)
+            {
+                if (guest.DocumentId != null & guest.Name != null & guest.Surname != null)
+                    answer = true;
+                else
+                {
+                    return false;
+                }
+            }
+            return answer;
         }
 
         public void CreateNewBedroomAction()
         {
             Managers.EventManager.OnCreateNewBedroomButtonPressed(this,new EventArgs());
         }
+
+        public void UpdateCheckInAction()
+        {
+            CheckIn = CurrentCheckIn;
+           // Managers.EventManager.OnUpdateCheckInButtonPressed(this,CurrentCheckIn);
+        }
+
+        public void DeleteCheckInAction()
+        {
+            Managers.EventManager.OnDeleteCheckInButtonPressed(this,CurrentCheckIn);
+        }
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;

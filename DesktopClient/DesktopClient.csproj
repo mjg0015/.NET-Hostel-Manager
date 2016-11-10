@@ -70,10 +70,12 @@
     </ApplicationDefinition>
     <Compile Include="Commands\CreateNewBedroomCommand.cs" />
     <Compile Include="Commands\DeleteBedroomCommand.cs" />
+    <Compile Include="Commands\DeleteCheckInCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\SaveBedroomCommand.cs" />
     <Compile Include="Commands\SaveCheckInCommand.cs" />
     <Compile Include="Commands\UpdateBedroomCommand.cs" />
+    <Compile Include="Commands\UpdateCheckInCommand.cs" />
     <Compile Include="Data\BedTypeRepository.cs" />
     <Compile Include="Data\BathroomTypeRepository.cs" />
     <Compile Include="Data\BedroomRepository.cs" />
