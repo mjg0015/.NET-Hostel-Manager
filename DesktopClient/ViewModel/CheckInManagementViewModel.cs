@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using DesktopClient.Commands;
 using DesktopClient.EventArgsExtenctions;
@@ -15,6 +12,8 @@ namespace DesktopClient.ViewModel
 {
     class CheckInManagementViewModel  :INotifyPropertyChanged
     {
+        #region Binded Properties
+        
         private List<Guest> guestList;
         public List<Guest> GuestList
         {
@@ -71,8 +70,6 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        public string ManagerName { get; }
-
         private Bedroom currentAvailableBedroom ;
         public Bedroom CurrentAvailableBedroom
         {
@@ -99,9 +96,6 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        private IBedroomService bedroomService;
-        private ICheckInService checkInService;
-
         private CheckIn currentCheckIn;
 
         public CheckIn CurrentCheckIn
@@ -114,21 +108,44 @@ namespace DesktopClient.ViewModel
             }
         }
 
+        public string ManagerName { get; }
+
+        #endregion
+
+        #region Service instances
+
+        private IBedroomService bedroomService;
+        private ICheckInService checkInService;
+
+        #endregion
+
+        #region Commands properties
+
+        public ICommand SaveCheckIn { get; private set; }
+        public ICommand UpdateBedroom { get; private set; }
+        public ICommand DeleteBedroom { get; private set; }
+        public ICommand CreateNewBedroom { get; private set; }
+        public ICommand DeleteCheckIn { get; private set; }
+
+        #endregion
+
         public CheckInManagementViewModel(UserEventArgs userEventArgs)
         {
-            SaveCheckIn = new SaveCheckInCommand(this);
-            UpdateBedroom = new UpdateBedroomCommand(this);
-            DeleteBedroom = new DeleteBedroomCommand(this);
-            CreateNewBedroom = new CreateNewBedroomCommand(this);
-            UpdateCheckIn = new UpdateCheckInCommand(this);
-            DeleteCheckIn = new DeleteCheckInCommand(this);
+            initializeCommands();
             ManagerName = userEventArgs.UserName;
             initializeProperties();
-            Managers.EventManager.SaveNewBedroomButtonPressed+= onSaveNewBedroomButtonPressed;
-            Managers.EventManager.DeleteBedroomButtonPressed+= onDeleteBedroomButtonPressed;
-            Managers.EventManager.SaveCheckInButtonPressed+= onSaveCheckInButtonPressed;
-            Managers.EventManager.DeleteCheckInButtonPressed+= onDeleteCheckInButtonPressed;
+            subscribeEvents();
             canExecuteSaveCheckIn = true;
+        }
+
+        #region Events
+
+        private void subscribeEvents()
+        {
+            Managers.EventManager.SaveNewBedroomButtonPressed += onSaveNewBedroomButtonPressed;
+            Managers.EventManager.DeleteBedroomButtonPressed += onDeleteBedroomButtonPressed;
+            Managers.EventManager.SaveCheckInButtonPressed += onSaveCheckInButtonPressed;
+            Managers.EventManager.DeleteCheckInButtonPressed += onDeleteCheckInButtonPressed;
         }
 
         private void onDeleteCheckInButtonPressed(object source, CheckInEventArgs eventArgs)
@@ -151,38 +168,10 @@ namespace DesktopClient.ViewModel
            reloadData();
         }
 
-        private void initializeProperties()
-        {
-            CheckIn = new CheckIn();
-            CheckIn.ArrivingDate = DateTime.Today;
-            CheckIn.DepartureDate = DateTime.Today.AddDays(1);
-            bedroomService = new BedroomService();
-            checkInService =new CheckInService();
-           reloadData();
-        }
 
-        private async void reloadData()
-        {
-            AvailableRoomsList = await bedroomService.GetAvailableAsync();
-            AllRoomsList = await bedroomService.GetAllAsync();
-            AllCheckInList = await checkInService.GetPendingCheckOutAsync();
-        }
+        #endregion
 
-        private void createListOfGuests()
-        {
-            if(currentAvailableBedroom != null)
-            {
-                GuestList = new List<Guest>();
-                for (int i = 1; i <= currentAvailableBedroom.Size; i++)
-                {
-                    GuestList.Add(new Guest());
-                }
-                CheckIn.Guests = GuestList;
-            }else
-            {
-                GuestList = new List<Guest>();
-            }  
-        }
+        #region CanExecute Props
 
         private bool canExecuteSaveCheckIn;
 
@@ -251,12 +240,69 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        public ICommand SaveCheckIn { get; private set; }
-        public ICommand UpdateBedroom { get; private set; }
-        public ICommand DeleteBedroom { get; private set; }
-        public ICommand CreateNewBedroom { get; private set; }
-        public ICommand DeleteCheckIn { get; private set; }
-        public ICommand UpdateCheckIn { get; private set; }
+        #endregion
+
+        private void initializeCommands()
+        {
+            SaveCheckIn = new SaveCheckInCommand(this);
+            UpdateBedroom = new UpdateBedroomCommand(this);
+            DeleteBedroom = new DeleteBedroomCommand(this);
+            CreateNewBedroom = new CreateNewBedroomCommand(this);
+            DeleteCheckIn = new DeleteCheckInCommand(this);
+        }
+
+        private void initializeProperties()
+        {
+            CheckIn = new CheckIn();
+            CheckIn.ArrivingDate = DateTime.Today;
+            CheckIn.DepartureDate = DateTime.Today.AddDays(1);
+            bedroomService = new BedroomService();
+            checkInService = new CheckInService();
+            reloadData();
+        }
+
+        private async void reloadData()
+        {
+            AllRoomsList = await bedroomService.GetAllAsync();
+            AllCheckInList = await checkInService.GetPendingCheckOutAsync();
+            AvailableRoomsList = await bedroomService.GetAvailableAsync();
+        }
+
+        private void createListOfGuests()
+        {
+            if (currentAvailableBedroom != null)
+            {
+                GuestList = new List<Guest>();
+                for (int i = 1; i <= currentAvailableBedroom.Size; i++)
+                {
+                    GuestList.Add(new Guest());
+                }
+                CheckIn.Guests = GuestList;
+            }
+            else
+            {
+                GuestList = new List<Guest>();
+            }
+        }
+
+        private bool IsCheckInOk(CheckIn checkIn)
+        {
+            bool answer = false;
+
+            if (CurrentAvailableBedroom != null)
+                foreach (var guest in GuestList)
+                {
+                    if (guest.DocumentId != null & guest.Name != null & guest.Surname != null)
+                        answer = true;
+                    else
+                    {
+                        return false;
+                    }
+                }
+            return answer;
+        }
+
+        #region Actions
 
         public void UpdateBedroomAction()
         {
@@ -278,38 +324,17 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        private bool IsCheckInOk(CheckIn checkIn)
-        {
-            bool answer = false;
-
-            if (CurrentAvailableBedroom != null)
-            foreach (var guest in GuestList)
-            {
-                if (guest.DocumentId != null & guest.Name != null & guest.Surname != null)
-                    answer = true;
-                else
-                {
-                    return false;
-                }
-            }
-            return answer;
-        }
-
         public void CreateNewBedroomAction()
         {
             Managers.EventManager.OnCreateNewBedroomButtonPressed(this,new EventArgs());
-        }
-
-        public void UpdateCheckInAction()
-        {
-            CheckIn = CurrentCheckIn;
-           // Managers.EventManager.OnUpdateCheckInButtonPressed(this,CurrentCheckIn);
         }
 
         public void DeleteCheckInAction()
         {
             Managers.EventManager.OnDeleteCheckInButtonPressed(this,CurrentCheckIn);
         }
+
+        #endregion
 
         #region INotifyPropertyChanged Members
 

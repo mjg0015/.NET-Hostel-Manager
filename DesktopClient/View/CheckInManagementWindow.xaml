@@ -130,12 +130,12 @@
                     <Grid Name="ControlButtonGrid" Height="25" VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                                 <ColumnDefinition  />
-                                <ColumnDefinition  />
+                                
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <ComboBox Name="AllCheckInCB" Grid.Column="0"  SelectedItem="{ Binding CurrentCheckIn,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" ItemsSource="{Binding AllCheckInList,UpdateSourceTrigger=PropertyChanged}" />
-                            <Button  Grid.Column="1" Command="{Binding UpdateCheckIn}">Update</Button>
-                            <Button  Grid.Column="2" Command="{Binding DeleteCheckIn}">Delete</Button>
+                            
+                            <Button  Grid.Column="1" Command="{Binding DeleteCheckIn}">Delete</Button>
                         </Grid>
                     </Grid>
                 
