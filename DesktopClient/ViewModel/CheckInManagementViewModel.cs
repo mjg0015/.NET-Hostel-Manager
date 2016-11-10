@@ -110,7 +110,13 @@ namespace DesktopClient.ViewModel
             CreateNewBedroom = new CreateNewBedroomCommand(this);
             ManagerName = userEventArgs.UserName;
             initializeProperties();
+            Managers.EventManager.SaveNewBedroomButtonPressed+= onSaveNewBedroomButtonPressed;
             canExecuteSaveCheckIn = true;
+        }
+
+        private void onSaveNewBedroomButtonPressed(object source, EventArgs eventArgs)
+        {
+           reloadData();
         }
 
         private async void initializeProperties()
@@ -120,6 +126,11 @@ namespace DesktopClient.ViewModel
             CheckIn.DepartureDate = DateTime.Today.AddDays(1);
             bedroomService = new BedroomService();
             checkInService =new CheckInService();
+           reloadData();
+        }
+
+        private async void reloadData()
+        {
             AvailableRoomsList = await bedroomService.GetAvailableAsync();
             AllRoomsList = await bedroomService.GetAllAsync();
             AllCheckInList = await checkInService.GetPendingCheckOutAsync();
