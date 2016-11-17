@@ -30,27 +30,62 @@ namespace DesktopClient.Service
 
         public async Task<bool> CreateOrUpdateAsync(Bedroom bedroom)
         {
-            return await _bedroomRepo.InsertOrUpdateAsync(bedroom);
+            try
+            {
+                return await _bedroomRepo.InsertOrUpdateAsync(bedroom);
+            }
+            catch (Exception)
+            {
+                return false;
+            } 
         }
 
         public async Task<List<Bedroom>> GetAllAsync()
         {
-            return await _bedroomRepo.FindAllAsync();
+            try
+            {
+                return await _bedroomRepo.FindAllAsync();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public async Task<List<Bedroom>> GetAvailableAsync()
         {
-            return await _bedroomRepo.FindByAvailabilityAsync(true);
+            try
+            {
+                return await _bedroomRepo.FindByAvailabilityAsync(true);
+            }
+            catch (Exception)
+            {
+                return null;
+            }  
         }
 
         public async Task<List<Bedroom>> GetFilteredAsync(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _bedroomRepo.FindFiltered(minSize, maxPrice, bathroomType, bedType, available);
+            }
+            catch (Exception)
+            {
+                return null;
+            }   
         }
 
         public async Task<bool> RemoveAsync(Bedroom bedroom)
         {
-            return await _bedroomRepo.RemoveAsync(bedroom);
+            try
+            {
+                return await _bedroomRepo.RemoveAsync(bedroom);
+            }
+            catch (Exception)
+            {
+                return false;
+            }            
         }
     }
 }

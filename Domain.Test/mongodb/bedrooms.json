@@ -1,0 +1,40 @@
+[{
+	"_id" : 1,
+	"price" : 8.5,
+	"size" : 1,
+	"available" : true,
+	"bathroomType" : "Shared",
+	"bedType" : "Single"
+},
+{
+	"_id" : 2,
+	"price" : 15,
+	"size" : 2,
+	"available" : true,
+	"bathroomType" : "Private",
+	"bedType" : "Double"
+},
+{
+	"_id" : 3,
+	"price" : 6.25,
+	"size" : 5,
+	"available" : true,
+	"bathroomType" : "Shared",
+	"bedType" : "Bunk Bed"
+},
+{
+	"_id" : 4,
+	"price" : 7,
+	"size" : 3,
+	"available" : false,
+	"bathroomType" : "Shared",
+	"bedType" : "Bunk Bed"
+},
+{
+	"_id" : 5,
+	"price" : 9,
+	"size" : 2,
+	"available" : true,
+	"bathroomType" : "Shared",
+	"bedType" : "Single"
+}]

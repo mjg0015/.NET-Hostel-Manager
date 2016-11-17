@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DesktopClient.Service;
 using DesktopClient.Model;
 using System.Threading.Tasks;
@@ -8,9 +7,99 @@ using System.Collections.Generic;
 namespace Domain.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class BedroomTests : DomainTests
     {
+        IBedroomService _bedroomServ;
+
+        public BedroomTests()
+        {
+            _bedroomServ = new BedroomService();
+        }
+
         [TestMethod]
+        public async Task GetAllBedrooms()
+        {
+            var bedrooms = await _bedroomServ.GetAllAsync();
+            Assert.AreEqual(bedrooms.Count, 5);
+        }
+
+        [TestMethod]
+        public async Task GetAvailableBedrooms()
+        {
+            var bedrooms = await _bedroomServ.GetAvailableAsync();
+            Assert.AreEqual(bedrooms.Count, 4);
+        }
+
+        [TestMethod]
+        public async Task GetFilteredBedrooms()
+        {
+            var filteredBedrooms1 = await _bedroomServ.GetFilteredAsync(1, 50, new BathroomType("Shared"), new BedType("Single"), true);
+            Assert.AreEqual(filteredBedrooms1.Count, 2);
+            Assert.IsTrue(filteredBedrooms1.Find(x => x.Number == 1) != null);
+            Assert.IsTrue(filteredBedrooms1.Find(x => x.Number == 5) != null);
+            Assert.IsTrue(filteredBedrooms1.Find(x => x.Number == 4) == null);
+        }
+
+        [TestMethod]
+        public async Task CreateBedroom()
+        {
+            Bedroom bedroom = new Bedroom()
+            {
+                Number = 6,
+                Price = 10.12,
+                Size = 2,
+                Available = true,
+                BathroomType = new BathroomType("Shared"),
+                BedType = new BedType("Double"),
+            };
+
+            bool result = await _bedroomServ.CreateOrUpdateAsync(bedroom);
+            Assert.IsTrue(result);
+
+            List<Bedroom> bedrooms = await _bedroomServ.GetAllAsync();
+            Bedroom dbBedroom = bedrooms.Find(x => x.Number == bedroom.Number);
+
+            Assert.IsNotNull(dbBedroom);
+        }
+
+        [TestMethod]
+        public async Task UpdateBedroom()
+        {
+            int number = 5;
+            double newPrice = 3.14;
+
+            List<Bedroom> bedrooms = await _bedroomServ.GetAllAsync();
+            Bedroom bedroom = bedrooms.Find(x => x.Number == number);
+
+            bedroom.Price = newPrice;
+
+            bool result = await _bedroomServ.CreateOrUpdateAsync(bedroom);
+            Assert.IsTrue(result);
+
+            bedrooms = await _bedroomServ.GetAllAsync();
+            Bedroom dbBedroom = bedrooms.Find(x => x.Number == number);
+
+            Assert.AreEqual(dbBedroom.Price, newPrice);
+        }
+
+        [TestMethod]
+        public async Task RemoveBedroom()
+        {
+            int number = 3;
+
+            bool removed = await _bedroomServ.RemoveAsync(new Bedroom() { Number = number });
+            Assert.IsTrue(removed);
+
+            List<Bedroom> bedrooms = await _bedroomServ.GetAllAsync();
+            Bedroom dbBedroom = bedrooms.Find(x => x.Number == number);
+
+            Assert.IsNull(dbBedroom);
+
+            removed = await _bedroomServ.RemoveAsync(new Bedroom() { Number = 3 });
+            Assert.IsFalse(removed);
+        }
+
+        /*[TestMethod]
         public async Task TestMethod1()
         {
             Bedroom bedroom1 = new Bedroom() {
@@ -219,6 +308,6 @@ namespace Domain.Test
             bool b1 = await bedroomService.CreateOrUpdateAsync(bedroom1);
 
             Assert.IsTrue(b1);
-        }
+        }*/
     }
 }

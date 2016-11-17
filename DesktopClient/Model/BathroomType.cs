@@ -9,6 +9,7 @@ namespace DesktopClient.Model
         {
             Name = input;
         }
+
         [BsonId]
         public string Name { get; set; }
     }

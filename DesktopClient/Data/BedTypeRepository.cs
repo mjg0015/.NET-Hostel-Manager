@@ -7,7 +7,7 @@ namespace DesktopClient.Data
 {
     public class BedTypeRepository : Repository<BedType>, IAmenityRepository<BedType>
     {
-        public BedTypeRepository() : base("bedType")
+        public BedTypeRepository() : base("bedTypes")
         {
         }
 

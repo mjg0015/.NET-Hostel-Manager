@@ -6,7 +6,7 @@ namespace DesktopClient.Data
 {
     public class BathroomTypeRepository : Repository<BathroomType>, IAmenityRepository<BathroomType>
     {
-        public BathroomTypeRepository() : base("bathroomType")
+        public BathroomTypeRepository() : base("bathroomTypes")
         {
         }
 

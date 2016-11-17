@@ -2,7 +2,6 @@
 using DesktopClient.Model;
 using MongoDB.Driver;
 using System.Threading.Tasks;
-using System;
 
 namespace DesktopClient.Data
 {
@@ -11,6 +10,8 @@ namespace DesktopClient.Data
         Task<Bedroom> FindByIdAsync(int id);
 
         Task<List<Bedroom>> FindByAvailabilityAsync(bool availability);
+
+        Task<List<Bedroom>> FindFiltered(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available);
 
         Task<bool> InsertOrUpdateAsync(Bedroom bedroom);
 
@@ -77,6 +78,18 @@ namespace DesktopClient.Data
         {
             var result = await _collection.DeleteOneAsync(x => x.Number == bedroom.Number);
             return result.DeletedCount > 0;
+        }
+
+        public async Task<List<Bedroom>> FindFiltered(int minSize, double maxPrice, BathroomType bathroomType, BedType bedType, bool available)
+        {
+           List<Bedroom> bedrooms = await _collection.Find(
+                x => x.Size >= minSize &
+                x.Price < maxPrice &
+                x.BathroomTypeRef == bathroomType.Name &
+                x.BedTypeRef == bedType.Name &
+                x.Available == available).ToListAsync();
+
+            return await FillAmenitiesUtil(bedrooms);
         }
 
         private async Task<List<Bedroom>> FillAmenitiesUtil(List<Bedroom> bedrooms)

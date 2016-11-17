@@ -1,0 +1,22 @@
+[
+  {
+    "arrivingDate": ISODate("2016-10-15"),
+    "departureDate": ISODate("2016-10-16"),
+    "guests": [
+      "0000000001"
+    ],
+    "bedroom": 1,
+    "active": false
+  },
+  {
+    "arrivingDate": ISODate("2016-11-15"),
+    "departureDate": ISODate("2016-11-16"),
+    "guests": [
+      "0000000001",
+      "0000000002",
+      "0000000003"
+    ],
+    "bedroom": 4,
+    "active": true
+  }
+]

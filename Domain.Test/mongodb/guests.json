@@ -1,0 +1,21 @@
+[{
+	"_id" : "0000000001",
+	"name" : "Karl",
+	"surname" : "Marx",
+	"birthDate" : ISODate("1818-05-05"),
+	"sex" : "MALE"
+},
+{
+	"_id" : "0000000002",
+	"name" : "Marie",
+	"surname" : "Curie",
+	"birthDate" : ISODate("1867-11-07"),
+	"sex" : "FEMALE"
+},
+{
+	"_id" : "0000000003",
+	"name" : "Frederic",
+	"surname" : "Chopin",
+	"birthDate" : ISODate("1810-03-01"),
+	"sex" : "MALE"
+}]
