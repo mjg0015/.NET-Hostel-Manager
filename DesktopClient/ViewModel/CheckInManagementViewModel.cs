@@ -266,6 +266,8 @@ namespace DesktopClient.ViewModel
             AllRoomsList = await bedroomService.GetAllAsync();
             AllCheckInList = await checkInService.GetPendingCheckOutAsync();
             AvailableRoomsList = await bedroomService.GetAvailableAsync();
+            AllRoomsList = await bedroomService.GetAllAsync();
+            AllCheckInList = await checkInService.GetPendingCheckOutAsync();
         }
 
         private void createListOfGuests()
@@ -306,13 +308,14 @@ namespace DesktopClient.ViewModel
 
         public void UpdateBedroomAction()
         {
-           Managers.EventManager.OnUpdateBedroomButtonPressed(this,CurrentBedroom);
-            
+            if (CurrentBedroom != null)
+                Managers.EventManager.OnUpdateBedroomButtonPressed(this, CurrentBedroom);
         }
 
         public void DeleteBedroomAction()
         {
-            Managers.EventManager.OnDeleteBedroomButtonPressed(this,CurrentBedroom);
+            if (CurrentBedroom != null)
+                Managers.EventManager.OnDeleteBedroomButtonPressed(this, CurrentBedroom);
         }
 
         public  void SaveCheckInAction()
@@ -331,6 +334,7 @@ namespace DesktopClient.ViewModel
 
         public void DeleteCheckInAction()
         {
+            if(CurrentCheckIn!=null)
             Managers.EventManager.OnDeleteCheckInButtonPressed(this,CurrentCheckIn);
         }
 
