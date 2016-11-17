@@ -118,25 +118,6 @@ namespace DesktopClient.Managers
 
         #endregion
 
-        #region UpdateCheckInButtonPressedEventHandler Members
-
-        public static CheckIn CheckInToUpdate { get; private set; }
-
-        public delegate void UpdateCheckInButtonPressedEventHandler(object source, CheckInEventArgs eventArgs);
-
-        public static event UpdateCheckInButtonPressedEventHandler UpdateCheckInButtonPressed;
-
-        public static void OnUpdateCheckInButtonPressed(object source, CheckIn checkIn)
-        {
-            CheckInToUpdate = checkIn;
-            if (UpdateCheckInButtonPressed != null)
-            {
-                UpdateCheckInButtonPressed(source, new CheckInEventArgs(checkIn));
-            }
-        }
-
-        #endregion
-
         #region DeleteCheckInButtonPressedEventHandler Members
 
         public static CheckIn CheckInToDelete { get; private set; }

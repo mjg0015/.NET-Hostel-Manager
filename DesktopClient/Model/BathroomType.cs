@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
 namespace DesktopClient.Model
 {

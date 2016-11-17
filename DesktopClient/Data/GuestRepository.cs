@@ -1,7 +1,6 @@
 ﻿using DesktopClient.Model;
 using MongoDB.Driver;
 using System.Threading.Tasks;
-using System;
 
 namespace DesktopClient.Data
 {

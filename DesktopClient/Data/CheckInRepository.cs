@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DesktopClient.Model;
 using MongoDB.Driver;
 using System.Threading.Tasks;
