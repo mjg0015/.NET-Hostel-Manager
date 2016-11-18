@@ -19,6 +19,19 @@ namespace DesktopClient.ViewModel
 
         public User User { get; }
 
+        private string errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set
+            {
+                errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private bool canExecuteLogin;
 
         public bool CanExecuteLogin
@@ -37,14 +50,13 @@ namespace DesktopClient.ViewModel
         {
             IAuthenticationService authService = new AuthenticationService();
             User user = await authService.DoLoginAsync(User.Name, User.Password);
-
             if (user != null)
             {
                 Managers.EventManager.OnUserLoggedIn(this, User.Name);
             }
             else
             {
-                throw new NotImplementedException();
+                ErrorMessage = "Invalid User name or Password! Please, reenter your credentials.";
             }
         }
 

@@ -7,7 +7,7 @@ using DesktopClient.Model;
 
 namespace DesktopClient.ViewModel
 {
-    class BedroomEditorViewModel : INotifyPropertyChanged
+    public class BedroomEditorViewModel : INotifyPropertyChanged
     {
         private Bedroom newBedroom;
         public Bedroom NewBedroom

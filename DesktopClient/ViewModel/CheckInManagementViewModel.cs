@@ -10,7 +10,7 @@ using DesktopClient.Service;
 
 namespace DesktopClient.ViewModel
 {
-    class CheckInManagementViewModel  :INotifyPropertyChanged
+    public class CheckInManagementViewModel  :INotifyPropertyChanged
     {
         #region Binded Properties
         

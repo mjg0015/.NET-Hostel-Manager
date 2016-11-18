@@ -94,12 +94,12 @@
 
             <Label 
                 x:Name="lblError"
-                Content=""
                 HorizontalAlignment="Center"
                 Margin="10,0,10,0"
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
-                VerticalAlignment="Center" Foreground="#FFAE0000"/>
+                VerticalAlignment="Center" Foreground="#FFAE0000"
+                Content="{Binding ErrorMessage}"/>
 
             <Button 
                 x:Name="btnSignIn"
