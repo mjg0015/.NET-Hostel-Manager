@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClient", "DesktopCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Domain.Test\Tests.csproj", "{19A3EA25-59EA-471D-A456-C035A927BB8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteService", "RemoteService\RemoteService.csproj", "{02651471-4543-4084-B02E-282C3BCCE230}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{19A3EA25-59EA-471D-A456-C035A927BB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19A3EA25-59EA-471D-A456-C035A927BB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19A3EA25-59EA-471D-A456-C035A927BB8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02651471-4543-4084-B02E-282C3BCCE230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02651471-4543-4084-B02E-282C3BCCE230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02651471-4543-4084-B02E-282C3BCCE230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02651471-4543-4084-B02E-282C3BCCE230}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
