@@ -1,10 +1,8 @@
-﻿using DesktopClient.Model;
-using DesktopClient.Service;
+﻿using DomainModel;
+using DomainModel.DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Test
@@ -22,7 +20,7 @@ namespace Domain.Test
         [TestMethod]
         public async Task FindGuestById()
         {
-            Guest guest = await _guestServ.FindGuestByIdAsync("0000000001");
+            GuestDTO guest = await _guestServ.FindGuestByIdAsync("0000000001");
             Assert.AreEqual(guest.Name, "Karl");
 
             guest = await _guestServ.FindGuestByIdAsync("0000000009");
@@ -32,7 +30,7 @@ namespace Domain.Test
         [TestMethod]
         public async Task CreateGuest()
         {
-            Guest guest = new Guest()
+            GuestDTO guest = new GuestDTO()
             {
                 DocumentId = "0000000004",
                 Name = "Guest",
@@ -48,7 +46,7 @@ namespace Domain.Test
         [TestMethod]
         public async Task UpdateGuest()
         {
-            Guest guest = await _guestServ.FindGuestByIdAsync("0000000001");
+            GuestDTO guest = await _guestServ.FindGuestByIdAsync("0000000001");
             guest.Name = "Guest";
 
             bool result = await _guestServ.CreateOrUpdateAsync(guest);

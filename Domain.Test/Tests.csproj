@@ -69,14 +69,7 @@
     <Compile Include="AmenityTests.cs" />
     <Compile Include="DomainTests.cs" />
     <Compile Include="BedroomTests.cs" />
-    <Compile Include="LoginViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DesktopClient\DesktopClient.csproj">
-      <Project>{1dbffb95-d900-435f-a560-dacef34ee07c}</Project>
-      <Name>DesktopClient</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -104,7 +97,12 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteService\RemoteService.csproj">
+      <Project>{02651471-4543-4084-b02e-282c3bcce230}</Project>
+      <Name>RemoteService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

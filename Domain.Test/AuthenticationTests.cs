@@ -1,10 +1,6 @@
-﻿using DesktopClient.Model;
-using DesktopClient.Service;
+﻿using DomainModel.DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Service;
 using System.Threading.Tasks;
 
 namespace Domain.Test
@@ -12,7 +8,7 @@ namespace Domain.Test
     [TestClass]
     public class AuthenticationTests : DomainTests
     {
-        private AuthenticationService _authenticationServ;
+        private IAuthenticationService _authenticationServ;
 
         public AuthenticationTests()
         {
@@ -24,7 +20,7 @@ namespace Domain.Test
         {
             string username = "manager";
             string password = "password";
-            User user = await _authenticationServ.DoLoginAsync(username, password);
+            UserDTO user = await _authenticationServ.DoLoginAsync(username, password);
 
             Assert.IsNotNull(user);
             Assert.AreEqual(user.Name, username);
@@ -35,7 +31,7 @@ namespace Domain.Test
         {
             string username = "fakeuser";
             string password = "fakepass";
-            User user = await _authenticationServ.DoLoginAsync(username, password);
+            UserDTO user = await _authenticationServ.DoLoginAsync(username, password);
 
             Assert.IsNull(user);
         }

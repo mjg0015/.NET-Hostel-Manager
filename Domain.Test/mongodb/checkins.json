@@ -6,7 +6,8 @@
       "0000000001"
     ],
     "bedroom": 1,
-    "active": false
+    "active": false,
+    "price": 8.5
   },
   {
     "arrivingDate": ISODate("2016-11-15"),
@@ -17,6 +18,7 @@
       "0000000003"
     ],
     "bedroom": 4,
-    "active": true
+    "active": true,
+    "price":  6.25
   }
 ]

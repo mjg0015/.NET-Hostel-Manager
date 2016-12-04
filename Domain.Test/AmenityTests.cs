@@ -1,18 +1,16 @@
-﻿using DesktopClient.Model;
-using DesktopClient.Service;
+﻿using DomainModel.DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using Service;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Domain.Test
 {
     [TestClass]
     public class AmenityTests : DomainTests
     {
-        private AmenityService _amenityServ;
+        private IAmenityService _amenityServ;
 
         public AmenityTests()
         {
@@ -22,38 +20,38 @@ namespace Domain.Test
         [TestMethod]
         public async Task GetAllAmenitiesTypes()
         {
-            List<BedType> bedTypes = await _amenityServ.GetAllBedTypesAsync();
-            Assert.AreEqual(bedTypes.Count, 3);
+            IList<BedTypeDTO> bedTypesDTO = await _amenityServ.GetAllBedTypesAsync();
+            Assert.AreEqual(bedTypesDTO.Count, 3);
 
-            List<BathroomType> bathroomTypes = await _amenityServ.GetAllBathroomTypesAsync();
-            Assert.AreEqual(bathroomTypes.Count, 4);
+            IList<BathroomTypeDTO> bathroomTypesDTO = await _amenityServ.GetAllBathroomTypesAsync();
+            Assert.AreEqual(bathroomTypesDTO.Count, 4);
         }
 
         [TestMethod]
         public async Task CreateAmenitiesTypes()
         {
-            BedType bedType = new BedType("Ikea Bed");
-            bool result = await _amenityServ.CreateBedTypeAsync(bedType);
+            BedTypeDTO bedTypeDTO = new BedTypeDTO() { Name = "Ikea Bed" };
+            bool result = await _amenityServ.CreateBedTypeAsync(bedTypeDTO);
             Assert.IsTrue(result);
 
-            result = await _amenityServ.CreateBedTypeAsync(bedType);
+            result = await _amenityServ.CreateBedTypeAsync(bedTypeDTO);
             Assert.IsFalse(result);
 
-            BathroomType bathroomType = new BathroomType("Private with Shower");
-            result = await _amenityServ.CreateBathroomTypeAsync(bathroomType);
+            BathroomTypeDTO bathroomTypeDTO = new BathroomTypeDTO() { Name = "Private with Shower" };
+            result = await _amenityServ.CreateBathroomTypeAsync(bathroomTypeDTO);
             Assert.IsTrue(result);
 
-            result = await _amenityServ.CreateBathroomTypeAsync(bathroomType);
+            result = await _amenityServ.CreateBathroomTypeAsync(bathroomTypeDTO);
             Assert.IsFalse(result);
         }
 
         [TestMethod]
         public async Task CreateAmenitiesFromBedroom()
         {
-            BedType bedType = new BedType("Ikea Bed");
-            BathroomType bathroomType = new BathroomType("Private with Shower");
+            BedTypeDTO bedType = new BedTypeDTO() { Name = "Ikea Bed" };
+            BathroomTypeDTO bathroomType = new BathroomTypeDTO() { Name = "Private with Shower" };
 
-            Bedroom bedroom = new Bedroom()
+            BedroomDTO bedroom = new BedroomDTO()
             {
                 Number = 6,
                 Available = true,
@@ -66,12 +64,12 @@ namespace Domain.Test
             IBedroomService bedroomServ = new BedroomService();
             await bedroomServ.CreateOrUpdateAsync(bedroom);
 
-            List<BedType> bedTypes = await _amenityServ.GetAllBedTypesAsync();
-            BedType dbBedType = bedTypes.Find(x => x.Name == bedType.Name);
+            List<BedTypeDTO> bedTypes = new List<BedTypeDTO>(await _amenityServ.GetAllBedTypesAsync());
+            BedTypeDTO dbBedType = bedTypes.Find(x => x.Name == bedType.Name);
             Assert.IsNotNull(dbBedType);
 
-            List<BathroomType> bathroomTypes = await _amenityServ.GetAllBathroomTypesAsync();
-            BathroomType dbBathroomType = bathroomTypes.Find(x => x.Name == bathroomType.Name);
+            List<BathroomTypeDTO> bathroomTypes = new List<BathroomTypeDTO>(await _amenityServ.GetAllBathroomTypesAsync());
+            BathroomTypeDTO dbBathroomType = bathroomTypes.Find(x => x.Name == bathroomType.Name);
             Assert.IsNotNull(dbBedType);
         }
     }
