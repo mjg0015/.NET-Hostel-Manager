@@ -2,7 +2,7 @@
 
 namespace DomainModel.DTO
 {
-    [DataContract]
+    [DataContract(Name = "BedroomDTO")]
     public class BedroomDTO
     {
         [DataMember]

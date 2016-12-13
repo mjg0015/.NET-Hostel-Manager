@@ -2,8 +2,9 @@
 using DomainModel.DTO;
 using DomainModel;
 using System;
+using Service;
 
-namespace Service
+namespace RemoteService.Service
 {
     public class GuestService : AbstractService, IGuestService
     {

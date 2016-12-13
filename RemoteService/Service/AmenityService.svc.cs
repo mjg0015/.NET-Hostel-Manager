@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using DomainModel;
 using DomainModel.DTO;
+using Service;
 
-namespace Service
+namespace RemoteService.Service
 {
     public class AmenityService : AbstractService, IAmenityService
     {

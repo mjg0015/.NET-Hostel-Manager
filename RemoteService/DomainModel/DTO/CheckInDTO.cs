@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace DomainModel.DTO
 {
-    [DataContract]
+    [DataContract(Name = "CheckInDTO")]
     public class CheckInDTO
     {
         [DataMember]

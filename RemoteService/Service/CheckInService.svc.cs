@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DomainModel.DTO;
 using DomainModel;
+using Service;
 
-namespace Service
+namespace RemoteService.Service
 {
     public class CheckInService : AbstractService, ICheckInService
     {

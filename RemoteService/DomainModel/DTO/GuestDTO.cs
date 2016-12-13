@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace DomainModel.DTO
 {
-    [DataContract]
+    [DataContract(Name = "GuestDTO")]
     public class GuestDTO
     {
         [DataMember]
