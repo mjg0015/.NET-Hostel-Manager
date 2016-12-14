@@ -17,10 +17,10 @@
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>8000</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -104,12 +104,6 @@
     <Compile Include="DomainModel\Bedroom.cs" />
     <Compile Include="DomainModel\BedType.cs" />
     <Compile Include="DomainModel\CheckIn.cs" />
-    <Compile Include="DomainModel\DTO\BathroomTypeDTO.cs" />
-    <Compile Include="DomainModel\DTO\BedroomDTO.cs" />
-    <Compile Include="DomainModel\DTO\BedTypeDTO.cs" />
-    <Compile Include="DomainModel\DTO\CheckInDTO.cs" />
-    <Compile Include="DomainModel\DTO\GuestDTO.cs" />
-    <Compile Include="DomainModel\DTO\UserDTO.cs" />
     <Compile Include="DomainModel\Guest.cs" />
     <Compile Include="DomainModel\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,7 +129,12 @@
     <Compile Include="Service\AbstractService.cs" />
     <Compile Include="Service\IGuestService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DataContracts\DataContracts.csproj">
+      <Project>{b6fe22e9-c9e0-41e8-b5e3-04f88bd92a8b}</Project>
+      <Name>DataContracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -160,7 +159,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57880</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57880/</IISUrl>
+          <IISUrl>https://localhost:8000</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

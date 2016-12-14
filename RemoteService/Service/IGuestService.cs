@@ -1,4 +1,4 @@
-﻿using DomainModel.DTO;
+﻿using DomainModel.DataContracts;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -8,9 +8,9 @@ namespace Service
     public interface IGuestService
     {
         [OperationContract]
-        Task<bool> CreateOrUpdateAsync(GuestDTO guestDTO);
+        Task<bool> CreateOrUpdateAsync(GuestDto guestDto);
 
         [OperationContract]
-        Task<GuestDTO> FindGuestByIdAsync(string id);
+        Task<GuestDto> FindGuestByIdAsync(string id);
     }
 }

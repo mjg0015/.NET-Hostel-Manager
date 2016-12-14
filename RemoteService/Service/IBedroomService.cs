@@ -1,4 +1,4 @@
-﻿using DomainModel.DTO;
+﻿using DomainModel.DataContracts;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
@@ -9,15 +9,15 @@ namespace Service
     public interface IBedroomService
     {
         [OperationContract]
-        Task<IList<BedroomDTO>> GetAllAsync();
+        Task<IList<BedroomDto>> GetAllAsync();
 
         [OperationContract]
-        Task<IList<BedroomDTO>> GetAvailableAsync();
+        Task<IList<BedroomDto>> GetAvailableAsync();
 
         [OperationContract]
-        Task<bool> CreateOrUpdateAsync(BedroomDTO bedroomDTO);
+        Task<bool> CreateOrUpdateAsync(BedroomDto bedroomDto);
 
         [OperationContract]
-        Task<bool> RemoveAsync(BedroomDTO bedroomDTO);
+        Task<bool> RemoveAsync(BedroomDto bedroomDto);
     }
 }

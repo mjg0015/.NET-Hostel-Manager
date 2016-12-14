@@ -1,4 +1,4 @@
-﻿using DomainModel.DTO;
+﻿using DomainModel.DataContracts;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -10,15 +10,15 @@ namespace Service
     public interface ICheckInService
     {
         [OperationContract]
-        Task<IList<CheckInDTO>> GetPendingCheckOutAsync();
+        Task<IList<CheckInDto>> GetPendingCheckOutAsync();
 
         [OperationContract]
-        Task<IList<CheckInDTO>> GetBetweenDatesAsync(DateTime startDate, DateTime endDate);
+        Task<IList<CheckInDto>> GetBetweenDatesAsync(DateTime startDate, DateTime endDate);
 
         [OperationContract]
-        Task<bool> CreateAsync(CheckInDTO checkInDTO);
+        Task<bool> CreateAsync(CheckInDto checkInDto);
 
         [OperationContract]
-        Task<bool> DoCheckOutAsync(CheckInDTO checkInDTO);
+        Task<bool> DoCheckOutAsync(CheckInDto checkInDto);
     }
 }

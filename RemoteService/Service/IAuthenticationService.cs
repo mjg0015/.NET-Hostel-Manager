@@ -1,4 +1,4 @@
-﻿using DomainModel.DTO;
+﻿using DomainModel.DataContracts;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -8,6 +8,6 @@ namespace Service
     public interface IAuthenticationService
     {
         [OperationContract]
-        Task<UserDTO> DoLoginAsync(string username, string password);
+        Task<UserDto> DoLoginAsync(string username, string password);
     }
 }

@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace DomainModel.DTO
+namespace DomainModel.DataContracts
 {
-    [DataContract(Name = "GuestDTO")]
-    public class GuestDTO
+    [DataContract]
+    public enum Sex
+    {
+        [EnumMember]
+        MALE,
+        [EnumMember]
+        FEMALE
+    }
+
+    [DataContract]
+    public class GuestDto
     {
         [DataMember]
         public string DocumentId { get; set; }

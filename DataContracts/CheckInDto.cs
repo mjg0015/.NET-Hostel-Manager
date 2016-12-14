@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace DomainModel.DTO
+namespace DomainModel.DataContracts
 {
-    [DataContract(Name = "CheckInDTO")]
-    public class CheckInDTO
+    [DataContract]
+    public class CheckInDto
     {
         [DataMember]
         public object Id { get; set; }
@@ -17,10 +17,10 @@ namespace DomainModel.DTO
         public DateTime DepartureDate { get; set; }
 
         [DataMember]
-        public IList<GuestDTO> Guests { get; set; }
+        public IList<GuestDto> Guests { get; set; }
 
         [DataMember]
-        public BedroomDTO Bedroom { get; set; }
+        public BedroomDto Bedroom { get; set; }
 
         [DataMember]
         public bool Active { get; set; }

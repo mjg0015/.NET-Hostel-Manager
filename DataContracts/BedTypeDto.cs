@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace DomainModel.DTO
+namespace DomainModel.DataContracts
 {
-    [DataContract(Name = "BedTypeDTO")]
-    public class BedTypeDTO
+    [DataContract]
+    public class BedTypeDto
     {
         [DataMember]
         public string Name { get; set; }

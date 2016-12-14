@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
-using DomainModel.DTO;
 using DomainModel;
 using Service;
+using DomainModel.DataContracts;
 
 namespace RemoteService.Service
 {
     public class AuthenticationService : AbstractService, IAuthenticationService
     {
-        public async Task<UserDTO> DoLoginAsync(string username, string password)
+        public async Task<UserDto> DoLoginAsync(string username, string password)
         {
             User user = new User(_userRepository) {
                 Name = username,
@@ -17,7 +17,7 @@ namespace RemoteService.Service
             bool isCorrectLogin = await user.CheckAsync();
             if (isCorrectLogin)
             {
-                return _mapper.Map<UserDTO>(user);
+                return _mapper.Map<UserDto>(user);
             }else
             {
                 return null;

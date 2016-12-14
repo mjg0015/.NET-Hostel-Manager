@@ -4,18 +4,10 @@ using MongoDB.Bson;
 using Data;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using DomainModel.DataContracts;
 
 namespace DomainModel
 {
-    [DataContract]
-    public enum Sex
-    {
-        [EnumMember]
-        MALE,
-        [EnumMember]
-        FEMALE
-    }
-
     public class Guest
     {
         public const string COLLECTION_NAME = "guests";

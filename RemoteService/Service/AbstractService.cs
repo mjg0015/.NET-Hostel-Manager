@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Data;
 using DomainModel;
-using DomainModel.DTO;
+using DomainModel.DataContracts;
 using MongoDB.Driver;
 
 namespace Service
@@ -34,22 +34,22 @@ namespace Service
         private void ConfigureMapper()
         {
             MapperConfiguration mapperConfig = new MapperConfiguration(cfg => {
-                cfg.CreateMap<BathroomType, BathroomTypeDTO>();
-                cfg.CreateMap<BathroomTypeDTO, BathroomType>()
+                cfg.CreateMap<BathroomType, BathroomTypeDto>();
+                cfg.CreateMap<BathroomTypeDto, BathroomType>()
                     .ConstructUsing(x => new BathroomType(_bathroomTypeRepository));
-                cfg.CreateMap<BedType, BedTypeDTO>();
-                cfg.CreateMap<BedTypeDTO, BedType>()
+                cfg.CreateMap<BedType, BedTypeDto>();
+                cfg.CreateMap<BedTypeDto, BedType>()
                     .ConstructUsing(x => new BedType(_bedTypeRepository));
-                cfg.CreateMap<Bedroom, BedroomDTO>();
-                cfg.CreateMap<BedroomDTO, Bedroom>()
+                cfg.CreateMap<Bedroom, BedroomDto>();
+                cfg.CreateMap<BedroomDto, Bedroom>()
                     .ConstructUsing(x => new Bedroom(_bedroomRepository, _bathroomTypeRepository, _bedTypeRepository));
-                cfg.CreateMap<CheckIn, CheckInDTO>();
-                cfg.CreateMap<CheckInDTO, CheckIn>()
+                cfg.CreateMap<CheckIn, CheckInDto>();
+                cfg.CreateMap<CheckInDto, CheckIn>()
                     .ConstructUsing(x => new CheckIn(
                         _checkInRepository, _guestRepository, _bedroomRepository, _bathroomTypeRepository, _bedTypeRepository));
-                cfg.CreateMap<User, UserDTO>();
-                cfg.CreateMap<Guest, GuestDTO>();
-                cfg.CreateMap<GuestDTO, Guest>()
+                cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<Guest, GuestDto>();
+                cfg.CreateMap<GuestDto, Guest>()
                     .ConstructUsing(x => new Guest(_guestRepository));
             });
 

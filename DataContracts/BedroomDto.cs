@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace DomainModel.DTO
+namespace DomainModel.DataContracts
 {
-    [DataContract(Name = "BedroomDTO")]
-    public class BedroomDTO
+    [DataContract]
+    public class BedroomDto
     {
         [DataMember]
         public int Number { get; set; }
@@ -18,9 +18,9 @@ namespace DomainModel.DTO
         public bool Available { get; set; }
 
         [DataMember]
-        public BathroomTypeDTO BathroomType { get; set; }
+        public BathroomTypeDto BathroomType { get; set; }
 
         [DataMember]
-        public BedTypeDTO BedType { get; set; }
+        public BedTypeDto BedType { get; set; }
     }
 }
