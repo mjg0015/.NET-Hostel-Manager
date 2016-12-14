@@ -4,10 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClient", "DesktopClient\DesktopClient.csproj", "{1DBFFB95-D900-435F-A560-DACEF34EE07C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{02651471-4543-4084-B02E-282C3BCCE230} = {02651471-4543-4084-B02E-282C3BCCE230}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Domain.Test\Tests.csproj", "{19A3EA25-59EA-471D-A456-C035A927BB8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteService", "RemoteService\RemoteService.csproj", "{02651471-4543-4084-B02E-282C3BCCE230}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteServices", "RemoteService\RemoteServices.csproj", "{02651471-4543-4084-B02E-282C3BCCE230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataContracts", "DataContracts\DataContracts.csproj", "{B6FE22E9-C9E0-41E8-B5E3-04F88BD92A8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +32,10 @@ Global
 		{02651471-4543-4084-B02E-282C3BCCE230}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02651471-4543-4084-B02E-282C3BCCE230}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02651471-4543-4084-B02E-282C3BCCE230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6FE22E9-C9E0-41E8-B5E3-04F88BD92A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6FE22E9-C9E0-41E8-B5E3-04F88BD92A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6FE22E9-C9E0-41E8-B5E3-04F88BD92A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6FE22E9-C9E0-41E8-B5E3-04F88BD92A8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
