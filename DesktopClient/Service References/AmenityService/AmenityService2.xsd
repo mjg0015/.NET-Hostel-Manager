@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfBedType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BedType" nillable="true" type="tns:BedType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBedType" nillable="true" type="tns:ArrayOfBedType" />
+  <xs:complexType name="BedType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BedType" nillable="true" type="tns:BedType" />
+  <xs:complexType name="ArrayOfBathroomType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BathroomType" nillable="true" type="tns:BathroomType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBathroomType" nillable="true" type="tns:ArrayOfBathroomType" />
+  <xs:complexType name="BathroomType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BathroomType" nillable="true" type="tns:BathroomType" />
+</xs:schema>

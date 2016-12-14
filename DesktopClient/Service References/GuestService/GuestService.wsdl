@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GuestService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_IGuestService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://localhost:8000/Service/GuestService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://localhost:8000/Service/GuestService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://localhost:8000/Service/GuestService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IGuestService_CreateOrUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IGuestService_CreateOrUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGuestService_FindGuestById_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindGuestById" />
+  </wsdl:message>
+  <wsdl:message name="IGuestService_FindGuestById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindGuestByIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IGuestService">
+    <wsdl:operation name="CreateOrUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGuestService/CreateOrUpdate" message="tns:IGuestService_CreateOrUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGuestService/CreateOrUpdateResponse" message="tns:IGuestService_CreateOrUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindGuestById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGuestService/FindGuestById" message="tns:IGuestService_FindGuestById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGuestService/FindGuestByIdResponse" message="tns:IGuestService_FindGuestById_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IGuestService" type="tns:IGuestService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_IGuestService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateOrUpdate">
+      <soap:operation soapAction="http://tempuri.org/IGuestService/CreateOrUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindGuestById">
+      <soap:operation soapAction="http://tempuri.org/IGuestService/FindGuestById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GuestService">
+    <wsdl:port name="BasicHttpBinding_IGuestService" binding="tns:BasicHttpBinding_IGuestService">
+      <soap:address location="https://localhost:8000/Service/GuestService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

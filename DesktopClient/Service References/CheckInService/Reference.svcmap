@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ec9be53f-d82d-4c37-8c35-8a9aacce6eb5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="DataContracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://localhost:8000/Service/CheckInService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CheckInService.xsd" MetadataType="Schema" ID="e13512df-d4c4-4d5d-95e4-914d82c3bc24" SourceId="1" SourceUrl="https://localhost:8000/Service/CheckInService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CheckInService.wsdl" MetadataType="Wsdl" ID="0d83375c-d695-471e-87da-81aabe7731fe" SourceId="1" SourceUrl="https://localhost:8000/Service/CheckInService.svc?wsdl" />
+    <MetadataFile FileName="CheckInService1.xsd" MetadataType="Schema" ID="9d0dd958-f1fe-4d0d-b6cd-46dc799548d9" SourceId="1" SourceUrl="https://localhost:8000/Service/CheckInService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CheckInService2.xsd" MetadataType="Schema" ID="f3a350cb-f378-4ff6-9c04-057149e51533" SourceId="1" SourceUrl="https://localhost:8000/Service/CheckInService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

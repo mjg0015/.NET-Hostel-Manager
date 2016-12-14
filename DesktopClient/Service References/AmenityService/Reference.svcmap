@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2cbcbb76-5c37-4dbe-8dd1-ae9b7c7f49a8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="DataContracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://localhost:8000/Service/AmenityService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="AmenityService.xsd" MetadataType="Schema" ID="3684c08d-6461-44bb-ae04-56f7fdd22f69" SourceId="1" SourceUrl="https://localhost:8000/Service/AmenityService.svc?xsd=xsd1" />
+    <MetadataFile FileName="AmenityService1.xsd" MetadataType="Schema" ID="b90283dd-8c0b-4a50-ab08-d6aa51ad05c6" SourceId="1" SourceUrl="https://localhost:8000/Service/AmenityService.svc?xsd=xsd0" />
+    <MetadataFile FileName="AmenityService2.xsd" MetadataType="Schema" ID="f7f7738f-b193-488e-b98a-695d55f35bf9" SourceId="1" SourceUrl="https://localhost:8000/Service/AmenityService.svc?xsd=xsd2" />
+    <MetadataFile FileName="AmenityService.wsdl" MetadataType="Wsdl" ID="69cc7b44-a548-4b33-8f80-2a52ac9e5464" SourceId="1" SourceUrl="https://localhost:8000/Service/AmenityService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
