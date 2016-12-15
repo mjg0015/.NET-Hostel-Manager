@@ -1,36 +1,74 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using DesktopClient.BedroomService;
+using DesktopClient.CheckInService;
 using DesktopClient.EventArgsExtenctions;
-using DesktopClient.Service;
+using DesktopClient.Helpers;
 using DesktopClient.View;
+using MigraDoc.Rendering;
+using PdfSharp.Pdf;
+using IBedroomService = Service.IBedroomService;
+using ICheckInService = DesktopClient.CheckInService.ICheckInService;
 
 namespace DesktopClient.Managers
 {
     internal class ViewManager
     {
         private LoginWindow loginWindow;
-        private CheckInService checkInService;
-        private BedroomService bedroomService;
+       // private CheckInService checkInService;
+        private ICheckInService checkInService;
+        private BedroomService.IBedroomService bedroomService;
+        private string userName;
 
         public ViewManager(LoginWindow loginWindow)
         {
             this.loginWindow = loginWindow;
             loginWindow.Show();
-            checkInService = new CheckInService();
-            bedroomService = new BedroomService();
+            checkInService = new CheckInServiceClient();
+            bedroomService = new BedroomServiceClient();
             subscribeEvents();
         }
 
         private void subscribeEvents()
         {
             Managers.EventManager.UserLoggedIn += onUserLoggedIn;
-            Managers.EventManager.SaveCheckInButtonPressed += onSaveCheckInButtonPressed;
+            Managers.EventManager.CheckTheInvoiceButtonPressed += onCheckTheInvoiceButtonPressed;
             Managers.EventManager.SaveNewBedroomButtonPressed += onSaveNewBedroomButtonPressed;
             Managers.EventManager.CreateNewBedroomButtonPressed += onCreateNewBedroomButtonPressed;
             Managers.EventManager.DeleteBedroomButtonPressed += onDeleteBedroomButtonPressed;
             Managers.EventManager.UpdateBedroomButtonPressed += onUpdateBedroomButtonPressed;
             Managers.EventManager.DeleteCheckInButtonPressed += onDeleteCheckInButtonPressed;
+            Managers.EventManager.CancelInvoiceButtonPressed += onCancelInvoiceButtonPressed;
+            Managers.EventManager.SaveCheckInAndPrintInvoiceButtonPressed += onSaveCheckInAndPrintInvoiceButtonPressed;
+        }
+
+        private async void onSaveCheckInAndPrintInvoiceButtonPressed(object source, CheckInEventArgs eventArgs)
+        {
+            
+            await checkInService.CreateAsync(eventArgs.CheckIn);
+            foreach (Window window in Application.Current.Windows.Cast<Window>().Where(window => window.IsActive))
+            {
+                window.Close();
+            }
+
+            InvoiceCreator pdfCreator= new InvoiceCreator();
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(false,PdfFontEmbedding.Always);
+            pdfRenderer.Document = pdfCreator.CreateDocument(eventArgs.CheckIn, "Manager: " + userName);
+            pdfRenderer.RenderDocument();
+            string filename = eventArgs.CheckIn.Id+".pdf";
+            pdfRenderer.PdfDocument.Save(filename);
+            Process.Start(filename);
+
+        }
+
+        private void onCancelInvoiceButtonPressed(object source, EventArgs eventArgs)
+        {
+            foreach (Window window in Application.Current.Windows.Cast<Window>().Where(window => window.IsActive))
+            {
+                window.Close();
+            }
         }
 
         private async void onDeleteCheckInButtonPressed(object source, CheckInEventArgs eventArgs)
@@ -48,9 +86,9 @@ namespace DesktopClient.Managers
             new BedroomEditorWindow(eventArgs).Show();
         }
 
-        private async void onSaveCheckInButtonPressed(object source,CheckInEventArgs eventArgs)
+        private void onCheckTheInvoiceButtonPressed(object source,CheckInEventArgs eventArgs)
         {
-           await checkInService.CreateAsync(eventArgs.CheckIn);
+            new InvoiceWindow(eventArgs.CheckIn).Show();
         }
 
         private async void onSaveNewBedroomButtonPressed(object source, BedroomEventArgs eventArgs)
@@ -70,6 +108,7 @@ namespace DesktopClient.Managers
         private void onUserLoggedIn(object source, UserEventArgs eventArgs)
         {
             new CheckInManagementWindow(eventArgs).Show();
+            userName= eventArgs.UserName;
             loginWindow.Close();
         }
     }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfCheckInDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CheckInDto" nillable="true" type="tns:CheckInDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCheckInDto" nillable="true" type="tns:ArrayOfCheckInDto" />
+  <xs:complexType name="CheckInDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ArrivingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Bedroom" nillable="true" type="tns:BedroomDto" />
+      <xs:element minOccurs="0" name="DepartureDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Guests" nillable="true" type="tns:ArrayOfGuestDto" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckInDto" nillable="true" type="tns:CheckInDto" />
+  <xs:complexType name="BedroomDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Available" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BathroomType" nillable="true" type="tns:BathroomTypeDto" />
+      <xs:element minOccurs="0" name="BedType" nillable="true" type="tns:BedTypeDto" />
+      <xs:element minOccurs="0" name="Number" type="xs:int" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="Size" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BedroomDto" nillable="true" type="tns:BedroomDto" />
+  <xs:complexType name="BathroomTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BathroomTypeDto" nillable="true" type="tns:BathroomTypeDto" />
+  <xs:complexType name="BedTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BedTypeDto" nillable="true" type="tns:BedTypeDto" />
+  <xs:complexType name="ArrayOfGuestDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GuestDto" nillable="true" type="tns:GuestDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGuestDto" nillable="true" type="tns:ArrayOfGuestDto" />
+  <xs:complexType name="GuestDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BirthDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocumentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sex" type="tns:Sex" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GuestDto" nillable="true" type="tns:GuestDto" />
+  <xs:simpleType name="Sex">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MALE" />
+      <xs:enumeration value="FEMALE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Sex" nillable="true" type="tns:Sex" />
+</xs:schema>

@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using DesktopClient.AuthenticationService;
 using DesktopClient.Commands;
-using DesktopClient.Model;
-using DesktopClient.Service;
+using DomainModel.DataContracts;
 
 
 namespace DesktopClient.ViewModel
@@ -13,11 +13,11 @@ namespace DesktopClient.ViewModel
     {
         public LoginViewModel()
         {
-            User = new User();
+            User = new UserDto();
             Login = new LoginCommand(this);
         }
 
-        public User User { get; }
+        public UserDto User { get; }
 
         private string errorMessage;
 
@@ -27,6 +27,17 @@ namespace DesktopClient.ViewModel
             set
             {
                 errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string userPassword ;
+        public string UserPassword
+        {
+            get { return userPassword; }
+            set
+            {
+                userPassword = value;
                 OnPropertyChanged();
             }
         }
@@ -48,8 +59,9 @@ namespace DesktopClient.ViewModel
 
         public async void LoginAction()
         {
-            IAuthenticationService authService = new AuthenticationService();
-            User user = await authService.DoLoginAsync(User.Name, User.Password);
+
+            IAuthenticationService authService = new AuthenticationServiceClient();
+            UserDto user = await authService.DoLoginAsync(User.Name, userPassword);
             if (user != null)
             {
                 Managers.EventManager.OnUserLoggedIn(this, User.Name);

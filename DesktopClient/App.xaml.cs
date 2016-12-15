@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
+using DesktopClient.EventArgsExtenctions;
 using DesktopClient.Managers;
 using DesktopClient.View;
 
@@ -14,6 +16,7 @@ namespace DesktopClient
             base.OnStartup(e);
             LoginWindow startWindow = new LoginWindow();
             new ViewManager(startWindow);
+           
         }
     }
 }

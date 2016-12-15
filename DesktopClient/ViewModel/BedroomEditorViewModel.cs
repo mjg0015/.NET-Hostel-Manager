@@ -3,14 +3,14 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using DesktopClient.Commands;
 using DesktopClient.EventArgsExtenctions;
-using DesktopClient.Model;
+using DomainModel.DataContracts;
 
 namespace DesktopClient.ViewModel
 {
     public class BedroomEditorViewModel : INotifyPropertyChanged
     {
-        private Bedroom newBedroom;
-        public Bedroom NewBedroom
+        private BedroomDto newBedroom;
+        public BedroomDto NewBedroom
         {
             get
             {
@@ -60,7 +60,7 @@ namespace DesktopClient.ViewModel
 
         public BedroomEditorViewModel()
         {
-            NewBedroom = new Bedroom();
+            NewBedroom = new BedroomDto();
             SaveBedroom = new SaveBedroomCommand(this);
             CanExecuteSaveBedroom = true;
         }
@@ -77,8 +77,11 @@ namespace DesktopClient.ViewModel
         public void SaveBedroomAction()
         {
             newBedroom.Available = true;
-            newBedroom.BathroomType = new BathroomType(newBathroomType);
-            newBedroom.BedType =new BedType( newBedType);
+            //newBedroom.BathroomType = new BathroomTypeDto();
+            //newBedroom.BedType = new BedTypeDto();
+            newBedroom.BathroomType.Name = newBathroomType;
+            newBedroom.BedType.Name = newBedType;
+            
             Managers.EventManager.OnSaveNewBedroomButtonPressed(this, newBedroom);
         }
 
