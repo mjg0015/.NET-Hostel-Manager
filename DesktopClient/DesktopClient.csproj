@@ -35,6 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MigraDoc.DocumentObjectModel-WPF, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\MigraDoc.DocumentObjectModel-WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering-WPF, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\MigraDoc.Rendering-WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-WPF, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\MigraDoc.RtfRendering-WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MongoDB.Bson, Version=2.3.0.157, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Bson.2.3.0\lib\net45\MongoDB.Bson.dll</HintPath>
       <Private>True</Private>
@@ -47,9 +59,20 @@
       <HintPath>..\packages\MongoDB.Driver.Core.2.3.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PdfSharp-WPF, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\PdfSharp-WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-WPF, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-WPF.1.32.2608.0\lib\net20\PdfSharp.Charting-WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,40 +91,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Adapters\BedroomDtoAdapter.cs" />
+    <Compile Include="Adapters\CheckInDtoAdapter.cs" />
+    <Compile Include="Commands\CancelInvoiceCommand.cs" />
     <Compile Include="Commands\CreateNewBedroomCommand.cs" />
     <Compile Include="Commands\DeleteBedroomCommand.cs" />
     <Compile Include="Commands\DeleteCheckInCommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\SaveBedroomCommand.cs" />
-    <Compile Include="Commands\SaveCheckInCommand.cs" />
+    <Compile Include="Commands\CheckTheInvoiceCommand.cs" />
+    <Compile Include="Commands\SaveCheckInAndPrintInvoiceCommand.cs" />
     <Compile Include="Commands\UpdateBedroomCommand.cs" />
-    <Compile Include="Data\BedTypeRepository.cs" />
-    <Compile Include="Data\BathroomTypeRepository.cs" />
-    <Compile Include="Data\BedroomRepository.cs" />
-    <Compile Include="Data\CheckInRepository.cs" />
-    <Compile Include="Data\GuestRepository.cs" />
-    <Compile Include="Data\IAmenityRepository.cs" />
-    <Compile Include="Data\PersistenceFactory.cs" />
-    <Compile Include="Data\Repository.cs" />
-    <Compile Include="Data\UserRepository.cs" />
     <Compile Include="EventArgsExtenctions\BedroomEventArgs.cs" />
     <Compile Include="EventArgsExtenctions\CheckInEventArgs.cs" />
     <Compile Include="EventArgsExtenctions\UserEventArgs.cs" />
     <Compile Include="Managers\EventManager.cs" />
+    <Compile Include="Helpers\InvoiceCreator.cs" />
     <Compile Include="Managers\ViewManager.cs" />
-    <Compile Include="Model\BathroomType.cs" />
-    <Compile Include="Model\Bedroom.cs" />
-    <Compile Include="Model\BedType.cs" />
-    <Compile Include="Model\CheckIn.cs" />
-    <Compile Include="Model\Guest.cs" />
-    <Compile Include="Model\User.cs" />
-    <Compile Include="Service\AmenityService.cs" />
-    <Compile Include="Service\AuthenticationService.cs" />
-    <Compile Include="Service\BedroomService.cs" />
-    <Compile Include="Service\CheckInService.cs" />
-    <Compile Include="Service\GuestService.cs" />
+    <Compile Include="Service References\AmenityService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\AuthenticationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\BedroomService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CheckInService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\GuestService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BedroomEditorViewModel.cs" />
     <Compile Include="ViewModel\CheckInManagementViewModel.cs" />
+    <Compile Include="ViewModel\InvoiceViewModel.cs" />
     <Compile Include="View\BedroomEditorWindow.xaml.cs">
       <DependentUpon>BedroomEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -113,6 +147,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\InvoiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -120,6 +158,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\InvoiceWindow.xaml.cs">
+      <DependentUpon>InvoiceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -149,16 +190,151 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DomainModel.DataContracts.BathroomTypeDto.datasource" />
+    <None Include="Properties\DataSources\DomainModel.DataContracts.BedroomDto.datasource" />
+    <None Include="Properties\DataSources\DomainModel.DataContracts.BedTypeDto.datasource" />
+    <None Include="Properties\DataSources\DomainModel.DataContracts.CheckInDto.datasource" />
+    <None Include="Properties\DataSources\DomainModel.DataContracts.GuestDto.datasource" />
+    <None Include="Properties\DataSources\DomainModel.DataContracts.UserDto.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\AmenityService\AmenityService.wsdl" />
+    <None Include="Service References\AmenityService\AmenityService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmenityService\AmenityService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AmenityService\AmenityService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthenticationService\AuthenticationService.wsdl" />
+    <None Include="Service References\AuthenticationService\AuthenticationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthenticationService\AuthenticationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AuthenticationService\AuthenticationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BedroomService\BedroomService.wsdl" />
+    <None Include="Service References\BedroomService\BedroomService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BedroomService\BedroomService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BedroomService\BedroomService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CheckInService\CheckInService.wsdl" />
+    <None Include="Service References\CheckInService\CheckInService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CheckInService\CheckInService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CheckInService\CheckInService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GuestService\GuestService.wsdl" />
+    <None Include="Service References\GuestService\GuestService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GuestService\GuestService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GuestService\GuestService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AmenityService\" />
+    <WCFMetadataStorage Include="Service References\AuthenticationService\" />
+    <WCFMetadataStorage Include="Service References\BedroomService\" />
+    <WCFMetadataStorage Include="Service References\CheckInService\" />
+    <WCFMetadataStorage Include="Service References\GuestService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AmenityService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AmenityService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AmenityService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataContracts\DataContracts.csproj">
+      <Project>{b6fe22e9-c9e0-41e8-b5e3-04f88bd92a8b}</Project>
+      <Name>DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteService\RemoteServices.csproj">
+      <Project>{02651471-4543-4084-B02E-282C3BCCE230}</Project>
+      <Name>RemoteServices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AuthenticationService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AuthenticationService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AuthenticationService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CheckInService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CheckInService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CheckInService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BedroomService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BedroomService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BedroomService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GuestService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GuestService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\GuestService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

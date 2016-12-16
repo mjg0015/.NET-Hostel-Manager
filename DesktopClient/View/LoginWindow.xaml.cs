@@ -18,7 +18,7 @@ namespace DesktopClient.View
 
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
-            viewModel.User.Password = pbPassword.Password;
+            viewModel.UserPassword = pbPassword.Password;
         }
     }
 }

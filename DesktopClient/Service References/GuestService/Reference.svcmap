@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e7be1871-abb3-45c8-a53b-1359987034b1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="DataContracts" />
+    </ReferencedAssemblies>
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://localhost:8000/Service/GuestService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GuestService.xsd" MetadataType="Schema" ID="4e97236b-2d32-43a4-b574-f4619be247ea" SourceId="1" SourceUrl="https://localhost:8000/Service/GuestService.svc?xsd=xsd1" />
+    <MetadataFile FileName="GuestService.wsdl" MetadataType="Wsdl" ID="2ff14168-364c-4701-b610-195fb9e480dd" SourceId="1" SourceUrl="https://localhost:8000/Service/GuestService.svc?wsdl" />
+    <MetadataFile FileName="GuestService1.xsd" MetadataType="Schema" ID="9bf3e2d2-b399-49a3-92dd-4d0d6e5d1e50" SourceId="1" SourceUrl="https://localhost:8000/Service/GuestService.svc?xsd=xsd0" />
+    <MetadataFile FileName="GuestService2.xsd" MetadataType="Schema" ID="f7aa6d5a-e542-4056-86f9-f52dd0a08eb4" SourceId="1" SourceUrl="https://localhost:8000/Service/GuestService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

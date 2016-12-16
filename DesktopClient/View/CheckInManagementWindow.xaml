@@ -81,7 +81,7 @@
                             <ColumnDefinition  />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Save check in" Grid.Column="2" Command="{Binding SaveCheckIn}" IsEnabled="{Binding CanExecuteSaveCheckIn,UpdateSourceTrigger=PropertyChanged}" ></Button>
+                        <Button Content="Check the invoice" Grid.Column="2" Command="{Binding CheckTheInvoice}" IsEnabled="{Binding CanExecuteCheckTheInvoice, UpdateSourceTrigger=PropertyChanged}" ></Button>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -139,6 +139,46 @@
                         </Grid>
                     </Grid>
                 
+            </TabItem>
+            
+            <TabItem Header="History of checkins">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" >
+                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker Grid.Column="0"></DatePicker>
+                        <DatePicker Grid.Column="1"></DatePicker>
+                    </Grid>
+                    <DataGrid Grid.Row="1" x:Name="HistoryChekinsDataGrid" ItemsSource="{Binding AllCheckInList}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Arriving Date" Binding="{Binding ArrivingDate}" Width="auto"/>
+                            <DataGridTextColumn Header="Departure Date" Binding="{Binding DepartureDate}" Width="auto"/>
+                            <DataGridTextColumn Header="Bedroom:" Binding="{Binding Bedroom}"/>
+                            <DataGridTextColumn Header="List of Guests" Binding="{Binding Guest}" Width="auto"/>
+                            <DataGridTextColumn Header="Size" Binding="{Binding Value}" Width="auto"/>
+                            <DataGridTextColumn Header="Bathroom type" Binding="{Binding Value}" Width="auto"/>
+                            <DataGridTextColumn Header="Bed type" Binding="{Binding Value}" Width="auto"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Value}" Width="auto"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Row="2" Name="ControlButton" Height="40" VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  />
+
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Total hostel income:" FontSize="25"></Label>
+                        <Label  Grid.Column="1" Content="total income"></Label>
+                    </Grid>
+                </Grid>
+
             </TabItem>
 
         </TabControl>

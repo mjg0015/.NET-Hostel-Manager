@@ -1,13 +1,13 @@
 ﻿using System;
-using DesktopClient.Model;
+using DomainModel.DataContracts;
 
 namespace DesktopClient.EventArgsExtenctions
 {
     class CheckInEventArgs:EventArgs
     {
-        public CheckIn CheckIn { get; private set; }
+        public CheckInDto CheckIn { get; private set; }
 
-        public CheckInEventArgs(CheckIn checkIn)
+        public CheckInEventArgs(CheckInDto checkIn)
         {
             CheckIn = checkIn;
         }

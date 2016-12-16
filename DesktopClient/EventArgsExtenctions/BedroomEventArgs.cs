@@ -1,13 +1,13 @@
 ﻿using System;
-using DesktopClient.Model;
+using DomainModel.DataContracts;
 
 namespace DesktopClient.EventArgsExtenctions
 {
     public class BedroomEventArgs:EventArgs
     {
-        public Bedroom Bedroom { get; private set; }
+        public BedroomDto Bedroom { get; private set; }
 
-        public BedroomEventArgs(Bedroom bedroom)
+        public BedroomEventArgs(BedroomDto bedroom)
         {
             Bedroom = bedroom;
         }
