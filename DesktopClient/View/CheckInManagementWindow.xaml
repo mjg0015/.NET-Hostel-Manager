@@ -134,8 +134,8 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <ComboBox Name="AllCheckInCB" Grid.Column="0"  SelectedItem="{ Binding CurrentCheckIn,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" ItemsSource="{Binding AllCheckInList,UpdateSourceTrigger=PropertyChanged}" />
-                            
-                            <Button  Grid.Column="1" Command="{Binding DeleteCheckIn}">Delete</Button>
+
+                        <Button  Grid.Column="1" Command="{Binding DeleteCheckIn}">Check out</Button>
                         </Grid>
                     </Grid>
                 
@@ -152,20 +152,18 @@
                         <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <DatePicker Grid.Column="0"></DatePicker>
-                        <DatePicker Grid.Column="1"></DatePicker>
+                        <DatePicker Grid.Column="0" SelectedDate="{Binding LowerBound,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding UseDateFilter}"></DatePicker>
+                        <DatePicker Grid.Column="1" SelectedDate="{Binding UpperBound, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding UseDateFilter}"></DatePicker>
+                        <CheckBox Grid.Column="2" Content="Use date filter" IsChecked="{Binding UseDateFilter}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
-                    <DataGrid Grid.Row="1" x:Name="HistoryChekinsDataGrid" ItemsSource="{Binding AllCheckInList}" AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top">
+                    <DataGrid Grid.Row="1" x:Name="HistoryChekinsDataGrid" ItemsSource="{Binding HistoryCheckInList, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" x:FieldModifier="public" IsReadOnly="True" VerticalAlignment="Top">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Arriving Date" Binding="{Binding ArrivingDate}" Width="auto"/>
                             <DataGridTextColumn Header="Departure Date" Binding="{Binding DepartureDate}" Width="auto"/>
                             <DataGridTextColumn Header="Bedroom:" Binding="{Binding Bedroom}"/>
-                            <DataGridTextColumn Header="List of Guests" Binding="{Binding Guest}" Width="auto"/>
-                            <DataGridTextColumn Header="Size" Binding="{Binding Value}" Width="auto"/>
-                            <DataGridTextColumn Header="Bathroom type" Binding="{Binding Value}" Width="auto"/>
-                            <DataGridTextColumn Header="Bed type" Binding="{Binding Value}" Width="auto"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Value}" Width="auto"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="auto"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Grid Grid.Row="2" Name="ControlButton" Height="40" VerticalAlignment="Bottom">
@@ -175,7 +173,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="Total hostel income:" FontSize="25"></Label>
-                        <Label  Grid.Column="1" Content="total income"></Label>
+                        <Label  Grid.Column="1" Content="{Binding Income,UpdateSourceTrigger=PropertyChanged}" FontSize="25"></Label>
                     </Grid>
                 </Grid>
 

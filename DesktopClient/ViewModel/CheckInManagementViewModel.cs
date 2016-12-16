@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System.Xaml.Permissions;
 using DesktopClient.Adapters;
 using DesktopClient.BedroomService;
 using DesktopClient.CheckInService;
@@ -104,13 +103,82 @@ namespace DesktopClient.ViewModel
         }
 
         private CheckInDtoAdapter currentCheckIn;
-
         public CheckInDtoAdapter CurrentCheckIn
         {
             get { return currentCheckIn; }
             set
             {
                 currentCheckIn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<CheckInDtoAdapter> historyCheckInList;
+        public List<CheckInDtoAdapter> HistoryCheckInList
+        {
+            get { return historyCheckInList; }
+            set
+            {
+                historyCheckInList = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime lowerBound;
+
+        public DateTime LowerBound
+        {
+            get { return lowerBound; }
+            set
+            {
+                lowerBound = value;
+                reloadHistoryCheckins(lowerBound, upperBound);
+                OnPropertyChanged();
+               
+            }
+        }
+
+        private DateTime upperBound;
+
+        public DateTime UpperBound
+        {
+            get
+            {
+                return upperBound;
+            }
+            set
+            {
+                upperBound = value;
+                reloadHistoryCheckins(lowerBound, upperBound);
+                OnPropertyChanged();
+                
+            }
+        }
+
+        private bool useDateFilter;
+
+        public bool UseDateFilter
+        {
+            get { return useDateFilter; }
+            set
+            {
+                useDateFilter = value;
+                reloadHistoryCheckins(lowerBound,upperBound);
+                OnPropertyChanged();
+            }
+        }
+
+        private double income;
+
+        public double Income
+        {
+            get
+            {
+                return income;
+            }
+            set
+            {
+                income = value;
                 OnPropertyChanged();
             }
         }
@@ -263,8 +331,10 @@ namespace DesktopClient.ViewModel
             CheckIn = new CheckInDtoAdapter();
             CheckIn.ArrivingDate = DateTime.Today;
             CheckIn.DepartureDate = DateTime.Today.AddDays(1);
+            lowerBound = upperBound =DateTime.Today;
             bedroomService = new BedroomServiceClient();
             checkInService = new CheckInServiceClient();
+            UseDateFilter = false;
             reloadData();
         }
 
@@ -287,11 +357,38 @@ namespace DesktopClient.ViewModel
             return returnList;
         }
 
+        private async void reloadHistoryCheckins(DateTime lowerBound, DateTime upperBound)
+        {
+
+            if(useDateFilter)
+            HistoryCheckInList =
+                await
+                    checkInService.GetBetweenDatesAsync(lowerBound, upperBound)
+                        .ContinueWith(antecendent => toCheckInAdapterList(antecendent.Result));
+            else
+            {
+                HistoryCheckInList =
+                await
+                    checkInService.GetAllAsync()
+                        .ContinueWith(antecendent => toCheckInAdapterList(antecendent.Result));
+            }
+            Income = 0;
+            foreach (var checkIn in HistoryCheckInList)
+            {
+                Income += checkIn.Price;
+            }
+
+        }
+        
+
         private async void reloadData()
         {
+            reloadHistoryCheckins(lowerBound,upperBound);
             AllRoomsList = (await bedroomService.GetAllAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
             AllCheckInList = (await checkInService.GetPendingCheckOutAsync().ContinueWith(antecendent => toCheckInAdapterList(antecendent.Result)));
             AvailableRoomsList = (await bedroomService.GetAvailableAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
+            AllRoomsList = (await bedroomService.GetAllAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
+            AllCheckInList = (await checkInService.GetPendingCheckOutAsync().ContinueWith(antecendent => toCheckInAdapterList(antecendent.Result)));
         }
 
         private void createListOfGuests()

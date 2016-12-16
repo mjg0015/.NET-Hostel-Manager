@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using DesktopClient.BedroomService;
 using DesktopClient.CheckInService;
 using DesktopClient.EventArgsExtenctions;
@@ -15,7 +16,6 @@ namespace DesktopClient.Managers
     internal class ViewManager
     {
         private LoginWindow loginWindow;
-       // private CheckInService checkInService;
         private ICheckInService checkInService;
         private IBedroomService bedroomService;
         private string userName;
@@ -55,7 +55,7 @@ namespace DesktopClient.Managers
             PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(false,PdfFontEmbedding.Always);
             pdfRenderer.Document = pdfCreator.CreateDocument(eventArgs.CheckIn, "Manager: " + userName);
             pdfRenderer.RenderDocument();
-            string filename = eventArgs.CheckIn.Id+".pdf";
+            string filename = DateTime.Now.ToString("yyyyMMddhhmmss")+".pdf";
             pdfRenderer.PdfDocument.Save(filename);
             Process.Start(filename);
 

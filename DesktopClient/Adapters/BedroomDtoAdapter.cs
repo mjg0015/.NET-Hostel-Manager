@@ -38,8 +38,8 @@ namespace DesktopClient.Adapters
              bedroomDto.Price = Price;
              bedroomDto.Size = Size;
              bedroomDto.Available = Available;
-             bedroomDto.BathroomType.Name = BathroomType.Name;
-             bedroomDto.BedType.Name = BedType.Name;
+             bedroomDto.BathroomType = BathroomType;
+             bedroomDto.BedType = BedType;
              return bedroomDto;
          }
     }
