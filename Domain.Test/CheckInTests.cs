@@ -38,7 +38,7 @@ namespace Domain.Test
         [TestMethod]
         public async Task GetAllCheckIns()
         {
-            IList<CheckInDto> checkIns = await _checkInServ.GetBetweenDatesAsync();
+            IList<CheckInDto> checkIns = await _checkInServ.GetAllAsync();
             Assert.AreEqual(checkIns.Count, 4);
         }
 

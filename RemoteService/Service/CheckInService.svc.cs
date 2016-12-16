@@ -29,7 +29,7 @@ namespace RemoteService.Service
             return checkInsDto;
         }
 
-        public async Task<IList<CheckInDto>> GetBetweenDatesAsync()
+        public async Task<IList<CheckInDto>> GetAllAsync()
         {
             CheckIn checkIn = new CheckIn(
                 _checkInRepository, _guestRepository, _bedroomRepository, _bathroomTypeRepository, _bedTypeRepository);
