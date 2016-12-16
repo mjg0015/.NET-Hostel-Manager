@@ -36,6 +36,13 @@ namespace Domain.Test
         }
 
         [TestMethod]
+        public async Task GetAllCheckIns()
+        {
+            IList<CheckInDto> checkIns = await _checkInServ.GetBetweenDatesAsync();
+            Assert.AreEqual(checkIns.Count, 4);
+        }
+
+        [TestMethod]
         public async Task CreateCheckIn()
         {
             GuestDto guest1 = new GuestDto()

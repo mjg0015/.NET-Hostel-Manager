@@ -16,6 +16,9 @@ namespace Service
         Task<IList<CheckInDto>> GetBetweenDatesAsync(DateTime startDate, DateTime endDate);
 
         [OperationContract]
+        Task<IList<CheckInDto>> GetBetweenDatesAsync();
+
+        [OperationContract]
         Task<bool> CreateAsync(CheckInDto checkInDto);
 
         [OperationContract]

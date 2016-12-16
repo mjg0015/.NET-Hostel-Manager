@@ -86,6 +86,19 @@ namespace DomainModel
             }
         }
 
+        public async Task<IList<CheckIn>> GetAll()
+        {
+            try
+            {
+                IList<CheckIn> checkIns = await _repository.FindAllAsync();
+                return await FillCheckInGuestsAndBedroomUtil(checkIns);
+            }
+            catch (Exception)
+            {
+                return new List<CheckIn>();
+            }
+        }
+
         public async Task<bool> CreateAsync()
         {
             Active = true;
