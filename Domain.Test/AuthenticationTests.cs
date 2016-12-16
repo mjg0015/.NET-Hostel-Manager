@@ -1,5 +1,6 @@
-﻿using DomainModel.DTO;
+﻿using DomainModel.DataContracts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RemoteService.Service;
 using Service;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace Domain.Test
         {
             string username = "manager";
             string password = "password";
-            UserDTO user = await _authenticationServ.DoLoginAsync(username, password);
+            UserDto user = await _authenticationServ.DoLoginAsync(username, password);
 
             Assert.IsNotNull(user);
             Assert.AreEqual(user.Name, username);
@@ -31,7 +32,7 @@ namespace Domain.Test
         {
             string username = "fakeuser";
             string password = "fakepass";
-            UserDTO user = await _authenticationServ.DoLoginAsync(username, password);
+            UserDto user = await _authenticationServ.DoLoginAsync(username, password);
 
             Assert.IsNull(user);
         }

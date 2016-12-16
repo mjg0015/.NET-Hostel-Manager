@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Service;
-using DomainModel.DTO;
+using DomainModel.DataContracts;
+using RemoteService.Service;
 
 namespace Domain.Test
 {
@@ -19,45 +20,35 @@ namespace Domain.Test
         [TestMethod]
         public async Task GetAllBedrooms()
         {
-            IList<BedroomDTO> bedrooms = await _bedroomServ.GetAllAsync();
+            IList<BedroomDto> bedrooms = await _bedroomServ.GetAllAsync();
             Assert.AreEqual(bedrooms.Count, 5);
         }
 
         [TestMethod]
         public async Task GetAvailableBedrooms()
         {
-            IList<BedroomDTO> bedrooms = await _bedroomServ.GetAvailableAsync();
+            IList<BedroomDto> bedrooms = await _bedroomServ.GetAvailableAsync();
             Assert.AreEqual(bedrooms.Count, 4);
         }
-
-        /*[TestMethod]
-        public async Task GetFilteredBedrooms()
-        {
-            var filteredBedrooms1 = await _bedroomServ.GetFilteredAsync(1, 50, new BathroomType("Shared"), new BedType("Single"), true);
-            Assert.AreEqual(filteredBedrooms1.Count, 2);
-            Assert.IsTrue(filteredBedrooms1.Find(x => x.Number == 1) != null);
-            Assert.IsTrue(filteredBedrooms1.Find(x => x.Number == 5) != null);
-            Assert.IsTrue(filteredBedrooms1.Find(x => x.Number == 4) == null);
-        }*/
 
         [TestMethod]
         public async Task CreateBedroom()
         {
-            BedroomDTO bedroom = new BedroomDTO()
+            BedroomDto bedroom = new BedroomDto()
             {
                 Number = 6,
                 Price = 10.12,
                 Size = 2,
                 Available = true,
-                BathroomType = new BathroomTypeDTO() { Name = "Shared" },
-                BedType = new BedTypeDTO() { Name= "Double" },
+                BathroomType = new BathroomTypeDto() { Name = "Shared" },
+                BedType = new BedTypeDto() { Name= "Double" },
             };
 
             bool result = await _bedroomServ.CreateOrUpdateAsync(bedroom);
             Assert.IsTrue(result);
 
-            List<BedroomDTO> bedrooms = new List<BedroomDTO>(await _bedroomServ.GetAllAsync());
-            BedroomDTO dbBedroom = bedrooms.Find(x => x.Number == bedroom.Number);
+            List<BedroomDto> bedrooms = new List<BedroomDto>(await _bedroomServ.GetAllAsync());
+            BedroomDto dbBedroom = bedrooms.Find(x => x.Number == bedroom.Number);
 
             Assert.IsNotNull(dbBedroom);
         }
@@ -68,16 +59,16 @@ namespace Domain.Test
             int number = 5;
             double newPrice = 3.14;
 
-            List<BedroomDTO> bedrooms = new List<BedroomDTO>(await _bedroomServ.GetAllAsync());
-            BedroomDTO bedroom = bedrooms.Find(x => x.Number == number);
+            List<BedroomDto> bedrooms = new List<BedroomDto>(await _bedroomServ.GetAllAsync());
+            BedroomDto bedroom = bedrooms.Find(x => x.Number == number);
 
             bedroom.Price = newPrice;
 
             bool result = await _bedroomServ.CreateOrUpdateAsync(bedroom);
             Assert.IsTrue(result);
 
-            bedrooms = new List<BedroomDTO>(await _bedroomServ.GetAllAsync());
-            BedroomDTO dbBedroom = bedrooms.Find(x => x.Number == number);
+            bedrooms = new List<BedroomDto>(await _bedroomServ.GetAllAsync());
+            BedroomDto dbBedroom = bedrooms.Find(x => x.Number == number);
 
             Assert.AreEqual(dbBedroom.Price, newPrice);
         }
@@ -87,15 +78,15 @@ namespace Domain.Test
         {
             int number = 3;
 
-            bool removed = await _bedroomServ.RemoveAsync(new BedroomDTO() { Number = number });
+            bool removed = await _bedroomServ.RemoveAsync(new BedroomDto() { Number = number });
             Assert.IsTrue(removed);
 
-            List<BedroomDTO> bedrooms = new List<BedroomDTO>(await _bedroomServ.GetAllAsync());
-            BedroomDTO dbBedroom = bedrooms.Find(x => x.Number == number);
+            List<BedroomDto> bedrooms = new List<BedroomDto>(await _bedroomServ.GetAllAsync());
+            BedroomDto dbBedroom = bedrooms.Find(x => x.Number == number);
 
             Assert.IsNull(dbBedroom);
 
-            removed = await _bedroomServ.RemoveAsync(new BedroomDTO() { Number = 3 });
+            removed = await _bedroomServ.RemoveAsync(new BedroomDto() { Number = 3 });
             Assert.IsFalse(removed);
         }
     }

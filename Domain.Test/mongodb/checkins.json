@@ -10,6 +10,26 @@
     "price": 8.5
   },
   {
+    "arrivingDate": ISODate("2016-09-15"),
+    "departureDate": ISODate("2016-09-16"),
+    "guests": [
+      "0000000002"
+    ],
+    "bedroom": 1,
+    "active": false,
+    "price": 8.5
+  },
+  {
+    "arrivingDate": ISODate("2016-08-15"),
+    "departureDate": ISODate("2016-08-16"),
+    "guests": [
+      "0000000003"
+    ],
+    "bedroom": 1,
+    "active": false,
+    "price": 8.5
+  },
+  {
     "arrivingDate": ISODate("2016-11-15"),
     "departureDate": ISODate("2016-11-16"),
     "guests": [

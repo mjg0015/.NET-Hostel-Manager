@@ -98,9 +98,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RemoteService\RemoteService.csproj">
+    <ProjectReference Include="..\DataContracts\DataContracts.csproj">
+      <Project>{b6fe22e9-c9e0-41e8-b5e3-04f88bd92a8b}</Project>
+      <Name>DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteService\RemoteServices.csproj">
       <Project>{02651471-4543-4084-b02e-282c3bcce230}</Project>
-      <Name>RemoteService</Name>
+      <Name>RemoteServices</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
