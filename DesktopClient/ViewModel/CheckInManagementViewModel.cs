@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Xaml.Permissions;
+using DesktopClient.Adapters;
 using DesktopClient.BedroomService;
 using DesktopClient.CheckInService;
 using DesktopClient.Commands;
@@ -28,8 +30,8 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        private CheckInDto checkIn;
-        public CheckInDto CheckIn
+        private CheckInDtoAdapter checkIn;
+        public CheckInDtoAdapter CheckIn
         {
             get { return checkIn; }
             set
@@ -39,8 +41,8 @@ namespace DesktopClient.ViewModel
             }
         }
  
-        private List<CheckInDto> allCheckInList;
-        public List<CheckInDto> AllCheckInList
+        private List<CheckInDtoAdapter> allCheckInList;
+        public List<CheckInDtoAdapter> AllCheckInList
         {
             get { return allCheckInList; }
             set
@@ -50,19 +52,22 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        private List<BedroomDto> availableRoomsList;
-        public List<BedroomDto> AvailableRoomsList
+        private List<BedroomDtoAdapter> availableRoomsList;
+        public List<BedroomDtoAdapter> AvailableRoomsList
         {
             get { return availableRoomsList; }
             set
             {
-                availableRoomsList = value;
+               
+                    availableRoomsList =value;
+               
+     
                 OnPropertyChanged();
             }
         }
 
-        private List<BedroomDto> allRoomsList;
-        public List<BedroomDto> AllRoomsList
+        private List<BedroomDtoAdapter> allRoomsList;
+        public List<BedroomDtoAdapter> AllRoomsList
         {
             get { return allRoomsList; }
             set
@@ -72,10 +77,8 @@ namespace DesktopClient.ViewModel
             }
         }
 
-
-
-        private BedroomDto currentAvailableBedroom ;
-        public BedroomDto CurrentAvailableBedroom
+        private BedroomDtoAdapter currentAvailableBedroom ;
+        public BedroomDtoAdapter CurrentAvailableBedroom
         {
             get { return currentAvailableBedroom; }
              set
@@ -86,8 +89,8 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        private BedroomDto currentBedroom;
-        public BedroomDto CurrentBedroom
+        private BedroomDtoAdapter currentBedroom;
+        public BedroomDtoAdapter CurrentBedroom
         {
             get
             {
@@ -100,9 +103,9 @@ namespace DesktopClient.ViewModel
             }
         }
 
-        private CheckInDto currentCheckIn;
+        private CheckInDtoAdapter currentCheckIn;
 
-        public CheckInDto CurrentCheckIn
+        public CheckInDtoAdapter CurrentCheckIn
         {
             get { return currentCheckIn; }
             set
@@ -257,7 +260,7 @@ namespace DesktopClient.ViewModel
 
         private void initializeProperties()
         {
-            CheckIn = new CheckInDto();
+            CheckIn = new CheckInDtoAdapter();
             CheckIn.ArrivingDate = DateTime.Today;
             CheckIn.DepartureDate = DateTime.Today.AddDays(1);
             bedroomService = new BedroomServiceClient();
@@ -265,15 +268,30 @@ namespace DesktopClient.ViewModel
             reloadData();
         }
 
+        private List<BedroomDtoAdapter> toBedroomDtoAdapterList(BedroomDto[] bedrooms)
+        {
+            List<BedroomDtoAdapter> returnList= new List<BedroomDtoAdapter>();
+            foreach (var bedroom in bedrooms)
+            {
+                returnList.Add(new BedroomDtoAdapter(bedroom));
+            }
+            return returnList;
+        }
+        private List<CheckInDtoAdapter> toCheckInAdapterList(CheckInDto[] checkIns)
+        {
+            List<CheckInDtoAdapter> returnList = new List<CheckInDtoAdapter>();
+            foreach (var checkIn in checkIns)
+            {
+                returnList.Add(new CheckInDtoAdapter(checkIn));
+            }
+            return returnList;
+        }
+
         private async void reloadData()
         {
-            
-            AllRoomsList = (await bedroomService.GetAllAsync()).ToList();
-            AllCheckInList = (await checkInService.GetPendingCheckOutAsync()).ToList();
-            AvailableRoomsList = (await bedroomService.GetAvailableAsync()).ToList();
-            AllRoomsList = (await bedroomService.GetAllAsync()).ToList();
-            AllCheckInList = (await checkInService.GetPendingCheckOutAsync()).ToList();
-            
+            AllRoomsList = (await bedroomService.GetAllAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
+            AllCheckInList = (await checkInService.GetPendingCheckOutAsync().ContinueWith(antecendent => toCheckInAdapterList(antecendent.Result)));
+            AvailableRoomsList = (await bedroomService.GetAvailableAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
         }
 
         private void createListOfGuests()
@@ -315,21 +333,22 @@ namespace DesktopClient.ViewModel
         public void UpdateBedroomAction()
         {
             if (CurrentBedroom != null)
-                Managers.EventManager.OnUpdateBedroomButtonPressed(this, CurrentBedroom);
+                Managers.EventManager.OnUpdateBedroomButtonPressed(this, CurrentBedroom.ToBedroomDto());
         }
 
         public void DeleteBedroomAction()
         {
             if (CurrentBedroom != null)
-                Managers.EventManager.OnDeleteBedroomButtonPressed(this, CurrentBedroom);
+                Managers.EventManager.OnDeleteBedroomButtonPressed(this, CurrentBedroom.ToBedroomDto());
         }
 
         public  void CheckTheInvoiceAction()
         {
             CheckIn.Bedroom = currentAvailableBedroom;
-            if (IsCheckInOk(CheckIn))
+            
+            if (IsCheckInOk(CheckIn.ToCheckInDto()))
             {
-                Managers.EventManager.OnCheckTheInvoiceButtonPressed(this, CheckIn);
+                Managers.EventManager.OnCheckTheInvoiceButtonPressed(this, CheckIn.ToCheckInDto());
             }
         }
 
@@ -341,7 +360,7 @@ namespace DesktopClient.ViewModel
         public void DeleteCheckInAction()
         {
             if(CurrentCheckIn!=null)
-            Managers.EventManager.OnDeleteCheckInButtonPressed(this,CurrentCheckIn);
+            Managers.EventManager.OnDeleteCheckInButtonPressed(this,CurrentCheckIn.ToCheckInDto());
         }
 
         #endregion

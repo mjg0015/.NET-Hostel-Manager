@@ -9,8 +9,6 @@ using DesktopClient.Helpers;
 using DesktopClient.View;
 using MigraDoc.Rendering;
 using PdfSharp.Pdf;
-using IBedroomService = Service.IBedroomService;
-using ICheckInService = DesktopClient.CheckInService.ICheckInService;
 
 namespace DesktopClient.Managers
 {
@@ -19,7 +17,7 @@ namespace DesktopClient.Managers
         private LoginWindow loginWindow;
        // private CheckInService checkInService;
         private ICheckInService checkInService;
-        private BedroomService.IBedroomService bedroomService;
+        private IBedroomService bedroomService;
         private string userName;
 
         public ViewManager(LoginWindow loginWindow)

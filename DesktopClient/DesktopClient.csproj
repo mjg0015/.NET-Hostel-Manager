@@ -91,6 +91,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Adapters\BedroomDtoAdapter.cs" />
+    <Compile Include="Adapters\CheckInDtoAdapter.cs" />
     <Compile Include="Commands\CancelInvoiceCommand.cs" />
     <Compile Include="Commands\CreateNewBedroomCommand.cs" />
     <Compile Include="Commands\DeleteBedroomCommand.cs" />

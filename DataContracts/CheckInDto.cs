@@ -8,7 +8,7 @@ namespace DomainModel.DataContracts
     public class CheckInDto
     {
         [DataMember]
-        public object Id { get; set; }
+        public string Id { get; set; }
 
         [DataMember]
         public DateTime ArrivingDate { get; set; }
