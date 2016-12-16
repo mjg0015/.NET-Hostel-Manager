@@ -28,10 +28,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAll">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" minOccurs="0" name="GetAllResult" nillable="true" type="q3:ArrayOfCheckInDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="Create">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" minOccurs="0" name="checkInDto" nillable="true" type="q3:CheckInDto" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" minOccurs="0" name="checkInDto" nillable="true" type="q4:CheckInDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -45,7 +57,7 @@
   <xs:element name="DoCheckOut">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" minOccurs="0" name="checkInDto" nillable="true" type="q4:CheckInDto" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DomainModel.DataContracts" minOccurs="0" name="checkInDto" nillable="true" type="q5:CheckInDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

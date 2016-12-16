@@ -13,7 +13,7 @@
       <xs:element minOccurs="0" name="Bedroom" nillable="true" type="tns:BedroomDto" />
       <xs:element minOccurs="0" name="DepartureDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Guests" nillable="true" type="tns:ArrayOfGuestDto" />
-      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" type="xs:double" />
     </xs:sequence>
   </xs:complexType>

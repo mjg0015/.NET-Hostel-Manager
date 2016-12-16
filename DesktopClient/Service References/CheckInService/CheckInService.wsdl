@@ -44,6 +44,12 @@
   <wsdl:message name="ICheckInService_GetBetweenDates_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetBetweenDatesResponse" />
   </wsdl:message>
+  <wsdl:message name="ICheckInService_GetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAll" />
+  </wsdl:message>
+  <wsdl:message name="ICheckInService_GetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResponse" />
+  </wsdl:message>
   <wsdl:message name="ICheckInService_Create_InputMessage">
     <wsdl:part name="parameters" element="tns:Create" />
   </wsdl:message>
@@ -64,6 +70,10 @@
     <wsdl:operation name="GetBetweenDates">
       <wsdl:input wsaw:Action="http://tempuri.org/ICheckInService/GetBetweenDates" message="tns:ICheckInService_GetBetweenDates_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICheckInService/GetBetweenDatesResponse" message="tns:ICheckInService_GetBetweenDates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICheckInService/GetAll" message="tns:ICheckInService_GetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICheckInService/GetAllResponse" message="tns:ICheckInService_GetAll_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Create">
       <wsdl:input wsaw:Action="http://tempuri.org/ICheckInService/Create" message="tns:ICheckInService_Create_InputMessage" />
@@ -88,6 +98,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetBetweenDates">
       <soap:operation soapAction="http://tempuri.org/ICheckInService/GetBetweenDates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAll">
+      <soap:operation soapAction="http://tempuri.org/ICheckInService/GetAll" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

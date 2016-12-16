@@ -27,27 +27,19 @@ namespace DesktopClient.CheckInService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICheckInService/GetBetweenDates", ReplyAction="http://tempuri.org/ICheckInService/GetBetweenDatesResponse")]
         System.Threading.Tasks.Task<DomainModel.DataContracts.CheckInDto[]> GetBetweenDatesAsync(System.DateTime startDate, System.DateTime endDate);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICheckInService/GetAll", ReplyAction="http://tempuri.org/ICheckInService/GetAllResponse")]
+        DomainModel.DataContracts.CheckInDto[] GetAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICheckInService/GetAll", ReplyAction="http://tempuri.org/ICheckInService/GetAllResponse")]
+        System.Threading.Tasks.Task<DomainModel.DataContracts.CheckInDto[]> GetAllAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICheckInService/Create", ReplyAction="http://tempuri.org/ICheckInService/CreateResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.CheckInDto[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.BedroomDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.BathroomTypeDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.BedTypeDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.GuestDto[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.GuestDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.Sex))]
         bool Create(DomainModel.DataContracts.CheckInDto checkInDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICheckInService/Create", ReplyAction="http://tempuri.org/ICheckInService/CreateResponse")]
         System.Threading.Tasks.Task<bool> CreateAsync(DomainModel.DataContracts.CheckInDto checkInDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICheckInService/DoCheckOut", ReplyAction="http://tempuri.org/ICheckInService/DoCheckOutResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.CheckInDto[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.BedroomDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.BathroomTypeDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.BedTypeDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.GuestDto[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.GuestDto))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainModel.DataContracts.Sex))]
         bool DoCheckOut(DomainModel.DataContracts.CheckInDto checkInDto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICheckInService/DoCheckOut", ReplyAction="http://tempuri.org/ICheckInService/DoCheckOutResponse")]
@@ -95,6 +87,14 @@ namespace DesktopClient.CheckInService {
         
         public System.Threading.Tasks.Task<DomainModel.DataContracts.CheckInDto[]> GetBetweenDatesAsync(System.DateTime startDate, System.DateTime endDate) {
             return base.Channel.GetBetweenDatesAsync(startDate, endDate);
+        }
+        
+        public DomainModel.DataContracts.CheckInDto[] GetAll() {
+            return base.Channel.GetAll();
+        }
+        
+        public System.Threading.Tasks.Task<DomainModel.DataContracts.CheckInDto[]> GetAllAsync() {
+            return base.Channel.GetAllAsync();
         }
         
         public bool Create(DomainModel.DataContracts.CheckInDto checkInDto) {
