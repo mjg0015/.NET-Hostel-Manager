@@ -194,7 +194,7 @@ namespace DesktopClient.Helpers
             string size = checkIn.Bedroom.Size.ToString();
             string bathroomType = checkIn.Bedroom.BathroomType.Name;
             string bedType = checkIn.Bedroom.BedType.Name;
-            string price = checkIn.Bedroom.Price.ToString();
+            string price = (checkIn.Bedroom.Price*(checkIn.DepartureDate - checkIn.ArrivingDate).Days).ToString();
 
 
             Row row1 = table.AddRow();

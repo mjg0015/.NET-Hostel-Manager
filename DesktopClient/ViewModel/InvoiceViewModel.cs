@@ -39,7 +39,7 @@ namespace DesktopClient.ViewModel
             Size = checkIn.Bedroom.Size.ToString();
             BathroomType = checkIn.Bedroom.BathroomType.Name;
             BedType = checkIn.Bedroom.BedType.Name;
-            Price = checkIn.Bedroom.Price.ToString();
+            Price = (checkIn.Bedroom.Price * (checkIn.DepartureDate - checkIn.ArrivingDate).Days).ToString();
             CancelInvoice = new CancelInvoiceCommand(this);
             SaveCheckInAndPrintInvoice = new SaveCheckInAndPrintInvoiceCommand(this);
         }

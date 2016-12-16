@@ -103,7 +103,8 @@ namespace DomainModel
         {
             Active = true;
             Bedroom.Available = false;
-            Price = Bedroom.Price;
+            int days = (DepartureDate - ArrivingDate).Days;
+            Price = Bedroom.Price * days;
 
             try
             {

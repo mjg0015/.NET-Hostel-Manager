@@ -27,8 +27,8 @@
                         <Label Content="Check In Date:" Grid.Column="0" Grid.Row="1" />
                         <Label Content="Check Out Date:" Grid.Column="1" Grid.Row="1" />
                         <Label Content="Select room:" Grid.Column="2" Grid.Row="1"  />
-                        <DatePicker Grid.Column="0" Grid.Row="2" Text="{Binding CheckIn.ArrivingDate}" />
-                        <DatePicker Grid.Column="1" Grid.Row="2" Text="{Binding CheckIn.DepartureDate}" />
+                        <DatePicker Grid.Column="0" Grid.Row="2" SelectedDate="{Binding CheckIn.ArrivingDate, UpdateSourceTrigger=PropertyChanged}" />
+                        <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding CheckIn.DepartureDate, UpdateSourceTrigger=PropertyChanged}" />
                         <ComboBox Name="AvailableRoomsCB" Grid.Column="2" Grid.Row="2" SelectedItem="{ Binding CurrentAvailableBedroom,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" ItemsSource="{Binding AvailableRoomsList,UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 

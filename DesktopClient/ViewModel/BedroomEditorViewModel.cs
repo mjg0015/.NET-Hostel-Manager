@@ -79,8 +79,8 @@ namespace DesktopClient.ViewModel
             newBedroom.Available = true;
             //newBedroom.BathroomType = new BathroomTypeDto();
             //newBedroom.BedType = new BedTypeDto();
-            newBedroom.BathroomType.Name = newBathroomType;
-            newBedroom.BedType.Name = newBedType;
+            newBedroom.BathroomType = new BathroomTypeDto() { Name = newBathroomType };
+            newBedroom.BedType = new BedTypeDto() { Name = newBedType };
             
             Managers.EventManager.OnSaveNewBedroomButtonPressed(this, newBedroom);
         }

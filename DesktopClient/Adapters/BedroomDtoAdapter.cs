@@ -16,6 +16,8 @@ namespace DesktopClient.Adapters
 
         public BedTypeDto BedType { get; set; }
 
+        public BedroomDtoAdapter() { }
+
          public BedroomDtoAdapter(BedroomDto bedroom)
          {
              Number = bedroom.Number;

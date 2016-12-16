@@ -329,7 +329,7 @@ namespace DesktopClient.ViewModel
         private void initializeProperties()
         {
             CheckIn = new CheckInDtoAdapter();
-            CheckIn.ArrivingDate = DateTime.Today;
+            CheckIn.ArrivingDate=DateTime.Today;
             CheckIn.DepartureDate = DateTime.Today.AddDays(1);
             lowerBound = upperBound =DateTime.Today;
             bedroomService = new BedroomServiceClient();
@@ -381,14 +381,15 @@ namespace DesktopClient.ViewModel
         }
         
 
-        private async void reloadData()
+        public async void reloadData()
         {
             reloadHistoryCheckins(lowerBound,upperBound);
             AllRoomsList = (await bedroomService.GetAllAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
             AllCheckInList = (await checkInService.GetPendingCheckOutAsync().ContinueWith(antecendent => toCheckInAdapterList(antecendent.Result)));
             AvailableRoomsList = (await bedroomService.GetAvailableAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
-            AllRoomsList = (await bedroomService.GetAllAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
-            AllCheckInList = (await checkInService.GetPendingCheckOutAsync().ContinueWith(antecendent => toCheckInAdapterList(antecendent.Result)));
+            //AllCheckInList = (await checkInService.GetPendingCheckOutAsync().ContinueWith(antecendent => toCheckInAdapterList(antecendent.Result)));
+            //AllRoomsList = (await bedroomService.GetAllAsync().ContinueWith(antecendent => toBedroomDtoAdapterList(antecendent.Result)));
+            //reloadHistoryCheckins(lowerBound, upperBound);
         }
 
         private void createListOfGuests()
@@ -442,7 +443,7 @@ namespace DesktopClient.ViewModel
         public  void CheckTheInvoiceAction()
         {
             CheckIn.Bedroom = currentAvailableBedroom;
-            
+
             if (IsCheckInOk(CheckIn.ToCheckInDto()))
             {
                 Managers.EventManager.OnCheckTheInvoiceButtonPressed(this, CheckIn.ToCheckInDto());

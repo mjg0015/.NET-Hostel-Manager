@@ -10,6 +10,7 @@ using DesktopClient.Helpers;
 using DesktopClient.View;
 using MigraDoc.Rendering;
 using PdfSharp.Pdf;
+using DesktopClient.ViewModel;
 
 namespace DesktopClient.Managers
 {
@@ -18,6 +19,7 @@ namespace DesktopClient.Managers
         private LoginWindow loginWindow;
         private ICheckInService checkInService;
         private IBedroomService bedroomService;
+        private CheckInManagementViewModel checkInManagementViewModel;
         private string userName;
 
         public ViewManager(LoginWindow loginWindow)
@@ -45,7 +47,6 @@ namespace DesktopClient.Managers
         private async void onSaveCheckInAndPrintInvoiceButtonPressed(object source, CheckInEventArgs eventArgs)
         {
             
-            await checkInService.CreateAsync(eventArgs.CheckIn);
             foreach (Window window in Application.Current.Windows.Cast<Window>().Where(window => window.IsActive))
             {
                 window.Close();
@@ -58,7 +59,9 @@ namespace DesktopClient.Managers
             string filename = DateTime.Now.ToString("yyyyMMddhhmmss")+".pdf";
             pdfRenderer.PdfDocument.Save(filename);
             Process.Start(filename);
-
+            eventArgs.CheckIn.ArrivingDate = eventArgs.CheckIn.ArrivingDate.AddDays(1);
+            eventArgs.CheckIn.DepartureDate = eventArgs.CheckIn.DepartureDate.AddDays(1);
+            await checkInService.CreateAsync(eventArgs.CheckIn).ContinueWith(antecendent => checkInManagementViewModel.reloadData());
         }
 
         private void onCancelInvoiceButtonPressed(object source, EventArgs eventArgs)
@@ -71,12 +74,12 @@ namespace DesktopClient.Managers
 
         private async void onDeleteCheckInButtonPressed(object source, CheckInEventArgs eventArgs)
         {
-            await checkInService.DoCheckOutAsync(eventArgs.CheckIn);
+            await checkInService.DoCheckOutAsync(eventArgs.CheckIn).ContinueWith(antecendent => checkInManagementViewModel.reloadData()); ;
         }
 
         private async void onDeleteBedroomButtonPressed(object source, BedroomEventArgs eventArgs)
         {
-            await bedroomService.RemoveAsync(eventArgs.Bedroom);
+            await bedroomService.RemoveAsync(eventArgs.Bedroom).ContinueWith(antecendent => checkInManagementViewModel.reloadData()); ;
         }
 
         private void onUpdateBedroomButtonPressed(object source, BedroomEventArgs eventArgs)
@@ -91,7 +94,7 @@ namespace DesktopClient.Managers
 
         private async void onSaveNewBedroomButtonPressed(object source, BedroomEventArgs eventArgs)
         {
-            await bedroomService.CreateOrUpdateAsync(eventArgs.Bedroom);
+            await bedroomService.CreateOrUpdateAsync(eventArgs.Bedroom).ContinueWith(antecendent => checkInManagementViewModel.reloadData());
             foreach (Window window in Application.Current.Windows.Cast<Window>().Where(window => window.IsActive))
             {
                 window.Close();
@@ -105,8 +108,10 @@ namespace DesktopClient.Managers
         
         private void onUserLoggedIn(object source, UserEventArgs eventArgs)
         {
-            new CheckInManagementWindow(eventArgs).Show();
-            userName= eventArgs.UserName;
+            var checkInManagementWindow = new CheckInManagementWindow(eventArgs);
+            checkInManagementWindow.Show();
+            checkInManagementViewModel = (CheckInManagementViewModel) checkInManagementWindow.DataContext;
+            userName = eventArgs.UserName;
             loginWindow.Close();
         }
     }
