@@ -22,8 +22,9 @@ namespace DomainModel
 
         private IAmenityRepository<BedType> _bedTypeRepository;
 
-        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
-        public object Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement("arrivingDate")]
         public DateTime ArrivingDate { get; set; }
