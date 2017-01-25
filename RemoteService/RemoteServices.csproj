@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Service\AmenityService.svc" />
-    <Content Include="Service\AuthenticationService.svc" />
+    <Content Include="Service\UserService.svc" />
     <Content Include="Service\BedroomService.svc" />
     <Content Include="Service\CheckInService.svc" />
     <Content Include="Service\GuestService.svc" />
@@ -110,8 +110,8 @@
     <Compile Include="Service\AmenityService.svc.cs">
       <DependentUpon>AmenityService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Service\AuthenticationService.svc.cs">
-      <DependentUpon>AuthenticationService.svc</DependentUpon>
+    <Compile Include="Service\UserService.svc.cs">
+      <DependentUpon>UserService.svc</DependentUpon>
     </Compile>
     <Compile Include="Service\BedroomService.svc.cs">
       <DependentUpon>BedroomService.svc</DependentUpon>
@@ -123,11 +123,12 @@
       <DependentUpon>GuestService.svc</DependentUpon>
     </Compile>
     <Compile Include="Service\IAmenityService.cs" />
-    <Compile Include="Service\IAuthenticationService.cs" />
+    <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\IBedroomService.cs" />
     <Compile Include="Service\ICheckInService.cs" />
     <Compile Include="Service\AbstractService.cs" />
     <Compile Include="Service\IGuestService.cs" />
+    <Compile Include="Util\PasswordUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataContracts\DataContracts.csproj">

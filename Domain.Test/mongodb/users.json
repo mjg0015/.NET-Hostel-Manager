@@ -1,4 +1,7 @@
-[{
-	"_id" : "manager",
-	"password" : "password"
-}]
+[
+  {
+    "_id": "manager",
+    "role": "MANAGER",
+    "password": "3H0PHmaENxWNZepIaDvSCl9vMs6QhNkQTbWelqvIYc9TDQRQ"
+  }
+]

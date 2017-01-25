@@ -48,6 +48,7 @@ namespace Service
                     .ConstructUsing(x => new CheckIn(
                         _checkInRepository, _guestRepository, _bedroomRepository, _bathroomTypeRepository, _bedTypeRepository));
                 cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<UserDto, User>().ConstructUsing(x => new User(_userRepository));
                 cfg.CreateMap<Guest, GuestDto>();
                 cfg.CreateMap<GuestDto, Guest>()
                     .ConstructUsing(x => new Guest(_guestRepository));
